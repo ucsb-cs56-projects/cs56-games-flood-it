@@ -3,6 +3,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
+
+/**
+ * 
+ *
+ * @author: Kai Jann and Sophia Mao
+ */
 public class FloodItGUI extends JFrame implements ActionListener{
 	
 			public void init(){
