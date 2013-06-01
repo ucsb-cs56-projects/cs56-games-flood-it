@@ -16,6 +16,7 @@ public class FloodItGUI extends JFrame implements ActionListener{
     
     //private variables for all the GUI components
     private JFrame frame;
+    private Container textContainer;
     private FloodItInstructGui instructions;
     private JTextArea messageArea;
     private JButton buttonRed;
@@ -30,27 +31,36 @@ public class FloodItGUI extends JFrame implements ActionListener{
     //static variables
     static Integer MOVES_LEFT = new Integer(25);
 	
+
+    //initialize JFrame
     public void init(){
+	//set JFrame properties
 	frame = new JFrame("Flood It!");
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	frame.setSize(1000,800);
 	
-	
+
 	buttonInstruction = new JButton("Instructions");
 	
+	//set JTextArea properties for the big message returning box
  	messageArea = new JTextArea(50,20);
 	messageArea.setEditable(false);
 
+	//set JTextField properties for countdown box
 	countdown = new JTextField(MOVES_LEFT.toString(),2);
 	countdown.setEditable(false);
 
+	//JLabel for the countdown JTextArea
 	movesLeft = new JLabel("moves left:");
 	
+	//Panel that holds the color buttons and countdown
 	buttonPanel = new JPanel();
 	
+	//add Countdown components to buttonPanel
 	buttonPanel.add(movesLeft);
 	buttonPanel.add(countdown);
 	
+	//buttonRed properties
 	buttonRed = new JButton("Red");
 	buttonRed.setBackground(Color.RED);
 	buttonPanel.add(buttonRed);
@@ -62,6 +72,7 @@ public class FloodItGUI extends JFrame implements ActionListener{
 		}
 	    });
 	
+	//buttonBlue properties
 	buttonBlue = new JButton("Blue");
 	buttonBlue.setBackground(Color.BLUE);
 	buttonBlue.setForeground(Color.WHITE);
@@ -74,6 +85,7 @@ public class FloodItGUI extends JFrame implements ActionListener{
 		}
 	    });
 	
+	//buttonGreen properties
 	buttonGreen = new JButton("Green");
         buttonGreen.setBackground(Color.GREEN);
 	buttonPanel.add(buttonGreen);
@@ -85,7 +97,7 @@ public class FloodItGUI extends JFrame implements ActionListener{
 		}
 	    });
 	
-	
+	//buttonYellow properties
 	JButton buttonYellow = new JButton("Yellow");
         buttonYellow.setBackground(Color.YELLOW);
        	buttonPanel.add(buttonYellow);
@@ -100,13 +112,14 @@ public class FloodItGUI extends JFrame implements ActionListener{
 	
 	
 	
-	
+	//add buttonPanel to South component in BorderLayout of JFrame
 	frame.getContentPane().add(BorderLayout.SOUTH,buttonPanel);
 	
-	Container textContainer = new Container();
+	//Container for text and instructions button
+        textContainer = new Container();
 	textContainer.setLayout(new BoxLayout(textContainer, BoxLayout.Y_AXIS));
 	
-	
+	//add Components to textContainer
 	textContainer.add(messageArea);
 	textContainer.add(buttonInstruction);
 	buttonInstruction.addActionListener(new ActionListener(){
@@ -117,7 +130,7 @@ public class FloodItGUI extends JFrame implements ActionListener{
 	    });
 	
 	
-
+	//add textContainer to JFrame
 	frame.getContentPane().add(BorderLayout.EAST,textContainer);
 	
 	frame.setVisible(true);
@@ -125,7 +138,7 @@ public class FloodItGUI extends JFrame implements ActionListener{
     
 
 
-
+    //@@@ TODO: add javadoc documentation
     public void run(){
 	init();
     }
@@ -133,7 +146,7 @@ public class FloodItGUI extends JFrame implements ActionListener{
 
 
 
-
+    //@@@ TODO: add javadoc documentation
     public Integer decrementAMove(){
 	if(MOVES_LEFT <= 0){
 	    messageArea.append("Out of moves!\n");
@@ -147,8 +160,7 @@ public class FloodItGUI extends JFrame implements ActionListener{
     
 
 
-
-    
+    //main method for Game Flood It
     public static void main(String args[]){
 
 	FloodItGUI game = new FloodItGUI();
