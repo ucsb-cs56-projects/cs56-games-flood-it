@@ -17,6 +17,7 @@ public class FloodItGUI extends JFrame implements ActionListener{
     //private variables for all the GUI components
     private JFrame frame;
     private Container textContainer;
+    //    private FloodItGrid gridBoard;
     private FloodItInstructGui instructions;
     private JTextArea messageArea;
     private JButton buttonRed;
@@ -35,7 +36,7 @@ public class FloodItGUI extends JFrame implements ActionListener{
     //initialize JFrame
     public void init(){
 	//set JFrame properties
-	frame = new JFrame("Flood It!");
+	frame = new JFrame("Flood It! by Sophia Mao and Kai Jann");
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	frame.setSize(1000,800);
 	
