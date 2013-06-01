@@ -17,7 +17,7 @@ public class FloodItGUI extends JFrame implements ActionListener{
     //private variables for all the GUI components
     private JFrame frame;
     private Container textContainer;
-    //    private FloodItGrid gridBoard;
+    private FloodItGrid gridBoard;
     private FloodItInstructGui instructions;
     private JTextArea messageArea;
     private JButton buttonRed;
@@ -40,6 +40,7 @@ public class FloodItGUI extends JFrame implements ActionListener{
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	frame.setSize(1000,800);
 	
+	gridBoard = new FloodItGrid();
 
 	buttonInstruction = new JButton("Instructions");
 	
@@ -133,6 +134,8 @@ public class FloodItGUI extends JFrame implements ActionListener{
 	
 	//add textContainer to JFrame
 	frame.getContentPane().add(BorderLayout.EAST,textContainer);
+	
+	frame.getContentPane().add(BorderLayout.CENTER, gridBoard);
 	
 	frame.setVisible(true);
     }
