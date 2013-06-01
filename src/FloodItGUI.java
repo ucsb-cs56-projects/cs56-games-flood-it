@@ -39,8 +39,10 @@ public class FloodItGUI extends JFrame implements ActionListener{
 	buttonInstruction = new JButton("Instructions");
 	
  	messageArea = new JTextArea(50,20);
+	messageArea.setEditable(false);
 
 	countdown = new JTextField(MOVES_LEFT.toString(),2);
+	countdown.setEditable(false);
 
 	movesLeft = new JLabel("moves left:");
 	
