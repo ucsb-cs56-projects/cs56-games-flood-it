@@ -68,8 +68,10 @@ public class FloodItGUI extends JFrame implements ActionListener{
 	buttonPanel.add(buttonRed);
 	buttonRed.addActionListener(new ActionListener(){
 		public void actionPerformed( ActionEvent e ){
-		    messageArea.append("red \n");
 		    countdown.setText(decrementAMove().toString());
+		    if(MOVES_LEFT != 0)
+			messageArea.append("red \n");
+
 
 		}
 	    });
@@ -81,8 +83,9 @@ public class FloodItGUI extends JFrame implements ActionListener{
 	buttonPanel.add(buttonBlue);
 	buttonBlue.addActionListener(new ActionListener(){
 		public void actionPerformed( ActionEvent e ){
-		    messageArea.append("blue \n");
 		    countdown.setText(decrementAMove().toString());
+		    if(MOVES_LEFT != 0)
+			messageArea.append("blue \n");
 
 		}
 	    });
@@ -93,8 +96,10 @@ public class FloodItGUI extends JFrame implements ActionListener{
 	buttonPanel.add(buttonGreen);
 	buttonGreen.addActionListener(new ActionListener(){
 		public void actionPerformed( ActionEvent e ){
-		    messageArea.append("green \n");
 		    countdown.setText(decrementAMove().toString());
+		    if(MOVES_LEFT != 0)
+			messageArea.append("green \n");
+
 
 		}
 	    });
@@ -105,8 +110,10 @@ public class FloodItGUI extends JFrame implements ActionListener{
        	buttonPanel.add(buttonYellow);
 	buttonYellow.addActionListener(new ActionListener(){
 		public void actionPerformed( ActionEvent e ){
-		    messageArea.append("yellow \n");
 		    countdown.setText(decrementAMove().toString());
+		    if(MOVES_LEFT != 0)
+			messageArea.append("yellow \n");
+
 
 		}
 	    });
