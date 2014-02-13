@@ -5,3 +5,5 @@ The purpose of the game is to, starting from the top left corner of the grid, co
 on the bottom until the whole screen becomes one color in a specified number of moves. The grid will be created by paintComponent that randomly selects 
 a color from the four colors and displays it on a Jpanel with the grid layout. As each button is clicked, the block with be repainted with the color that 
 was clicked and the amount of turns left will decrease by 1. 
+
+An example of the game 'Floodit' you can play can be found [here](http://floodit.appspot.com/)
