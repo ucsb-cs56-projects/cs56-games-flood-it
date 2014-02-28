@@ -9,6 +9,7 @@ updated by: Chris Luo & Kevin Briggs
 
   <property name="projectName" value="FloodIt" />   
   <property name="mainClass" value="FloodItGUI" />
+  <property name="packagePrefix" value="edu.ucsb.cs56.projects.games.flood_it.view" />
   <property environment="env"/> <!-- load the environment variables --> 
   <property name="projectPath" value="cs56/cs56_games_flood_it/javadoc" />
   <property name="webRoot" value="${env.HOME}/public_html" />
@@ -16,22 +17,23 @@ updated by: Chris Luo & Kevin Briggs
   <property name="jwsDest" value="${webRoot}/${projectPath}/jws" />
   <property name="jwsURL" value="${webBaseURL}/${projectPath}/jws" />
   <property name="javadocDest" value="${webRoot}/${projectPath}/javadoc" /> 
-  <property name="javadocURL" value="${webBaseURL}/${projectPath}/javadoc" /> 
+  <property name="javadocURL" value="${webBaseURL}/${projectPath}/javadoc" />
+  <path id = "project.class.path">
+    <pathelement location = "build" />
+    <pathelement location = "lib/junit-4.8.2.jar"/>
+  </path>
 
   <target name="compile" description="compile the program">
     <mkdir dir="build" />
     <javac srcdir="src" destdir="build" includeantruntime="false" debug="true" debuglevel="lines,vars,source" >
-      <classpath>
-	<pathelement location="build"/>
-	<pathelement location="lib/junit-4.8.2.jar"/>
-      </classpath>
+      <classpath refid = "project.class.path" />
     </javac>
   </target>
 
   <target name="run" depends="compile" description="run the mainClass of this program">
     <echo>
     </echo>
-    <java classname="${mainClass}" classpath="build" fork="true" />
+    <java classname="${packagePrefix}.${mainClass}" classpathref="project.class.path" fork="true" />
   </target>
 
   <target name="clean" description="delete unnecessary files and directories">
@@ -47,9 +49,8 @@ updated by: Chris Luo & Kevin Briggs
     <delete dir="javadoc" quiet="true" />
     <javadoc  destdir="javadoc" author="true" version="true" use="true" >
       <fileset dir="src" includes="**/*.java"/>
-      <classpath>
-	<pathelement location="lib/junit-4.8.2.jar"/>
-      </classpath>
+      <classpath refid = "project.class.path" />
+     <link href="${javadocLink}" /> <!-- for external links to std API classes -->
     </javadoc>
     
     <!-- delete the old javadoc -->
@@ -75,10 +76,7 @@ updated by: Chris Luo & Kevin Briggs
   <target name="test" depends="compile" description="run the JUnit tests">
 
     <junit haltonerror="no" haltonfailure="no">
-      <classpath>
-	<pathelement location="lib/junit-4.8.2.jar"/>
-	<pathelement location="build"/>
-      </classpath>
+  <classpath refid = "project.class.path" />
       
       <batchtest fork="yes">
 	<fileset dir="src">

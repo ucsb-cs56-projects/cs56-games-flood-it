@@ -1,8 +1,6 @@
 package edu.ucsb.cs56.projects.games.flood_it.view;
 
-
 import java.awt.Color;
-
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
