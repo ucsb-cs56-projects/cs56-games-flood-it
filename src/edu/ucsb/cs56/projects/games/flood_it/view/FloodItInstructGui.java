@@ -1,4 +1,4 @@
-package floodit.view;
+package edu.cs56.projects.games.flood_it.view;
 //edu.ucsb.cs56.projects.games.flood_it.model;
 //package edu.ucsb.cs56.projects.games.flood_it.controller;
 

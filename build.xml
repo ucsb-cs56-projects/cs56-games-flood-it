@@ -10,7 +10,7 @@ updated by: Chris Luo & Kevin Briggs
   <property name="projectName" value="FloodIt" />   
   <property name="mainClass" value="FloodItGUI" />
   <property environment="env"/> <!-- load the environment variables --> 
-  <property name="projectPath" value="cs56/W14/krbriggs/games_flood_it" />
+  <property name="projectPath" value="cs56/cs56_games_flood_it/javadoc" />
   <property name="webRoot" value="${env.HOME}/public_html" />
   <property name="webBaseURL" value="http://www.cs.ucsb.edu/~${env.USER}" />
   <property name="jwsDest" value="${webRoot}/${projectPath}/jws" />

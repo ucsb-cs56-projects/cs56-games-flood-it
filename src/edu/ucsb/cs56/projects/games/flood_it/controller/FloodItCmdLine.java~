@@ -1,7 +1,17 @@
 
 package floodit.controller;
 
-import floodit.model.FloodItGrid.java;
+import floodit.model.FloodItGrid;
+
+
+
+/**
+ * Class for the controller
+ * 
+ *
+ * @author Chris Luo
+ * @author Kevin Briggs
+ */
 
 
 public class FloodItCmdLine{
