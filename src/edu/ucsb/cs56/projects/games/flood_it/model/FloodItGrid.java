@@ -18,7 +18,7 @@ public class FloodItGrid {
      private int rows;
      private int cols;
      private int numColors = 6;
-     private Color[][] board;  
+     private FloodItCell[][] board;  
 
 
     public static final Color purple = new Color(99, 95, 170);
@@ -40,11 +40,15 @@ public class FloodItGrid {
 	 rows = r;
 	 cols = c;
 
-	board = new Color[rows][cols];
+	board = new FloodItCell[rows][cols];
 
-	for(int i=0; i<rows; i++)
-		for(int j=0; j<cols; j++)
-			board[i][j] = randColor();
+	for(int i=0; i<rows; i++){
+		for(int j=0; j<cols; j++){
+			Color t = randColor();
+			board[i][j] = new FloodItCell(i,j,t);
+
+		  }
+	}
 	 
 	
      }
@@ -88,6 +92,8 @@ public class FloodItGrid {
 	return cols;
     }
 
+
+   
     // add a toString method that just prints something like:
     //     FloodItGrid[rows=8,cols=6]
 
