@@ -1,7 +1,6 @@
+package edu.ucsb.cs56.projects.games.flood_it.controller;
 
-package edu.cs56.projects.games.flood_it.controller;
-
-import edu.cs56.projects.games.flood_it.model.FloodItGrid;
+import edu.ucsb.cs56.projects.games.flood_it.model.FloodItGrid;
 
 
 

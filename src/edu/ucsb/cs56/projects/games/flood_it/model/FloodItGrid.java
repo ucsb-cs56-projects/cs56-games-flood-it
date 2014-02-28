@@ -1,4 +1,4 @@
-package edu.cs56.projects.games.flood_it.model;
+package edu.ucsb.cs56.projects.games.flood_it.model;
 
 public class FloodItGrid {
      private int rows;

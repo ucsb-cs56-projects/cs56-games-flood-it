@@ -1,4 +1,4 @@
-package edu.cs56.projects.games.flood_it.model;
+package edu.ucsb.cs56.projects.games.flood_it.model;
 
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
@@ -11,8 +11,9 @@ import static org.junit.Assert.assertFalse;
     @author Kevin Briggs
     @version 2014/02/27 for prog1, cs56, W14
     @see FloodItGrid
-
 */
+
+public class FloodItGridTest{
 
 /** Test case for constructor
     @see FloodItGrid#FloodItGrid()
@@ -21,11 +22,9 @@ import static org.junit.Assert.assertFalse;
 @Test
 public void test_constructor(){
     FloodItGrid g1 = new FloodItGrid(12, 12);
-    assertEquals(12, g1.getRow());
+    assertEquals(12, g1.getRows());
     assertEquals(12, g1.getCols());
 }
-
-public class FlooditTest{
 
     /** Test case for getRow method
 	@see FloodItGrid#getRow
@@ -34,7 +33,7 @@ public class FlooditTest{
     @Test
     public void test_getRow(){
 	FloodItGrid g1 = new FloodItGrid(12, 12);
-	assertEquals(12, g1.getRow());
+	assertEquals(12, g1.getRows());
     }
 
     /** Test case for getCols
