@@ -8,6 +8,8 @@ public class FloodItGrid {
         // set rows and cols here\
 	 rows = r;
 	 cols = c;
+
+	 int 
      }
 
     // add getters for rows and cols, but no setters.
