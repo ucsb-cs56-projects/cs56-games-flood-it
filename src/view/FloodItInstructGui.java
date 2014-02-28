@@ -1,6 +1,6 @@
-//edu.ucsb.cs56.projects.games.flood_it.view;
+package edu.ucsb.cs56.projects.games.flood_it.view;
 //edu.ucsb.cs56.projects.games.flood_it.model;
-package edu.ucsb.cs56.projects.games.flood_it.controller;
+//package edu.ucsb.cs56.projects.games.flood_it.controller;
 
 import edu.ucsb.cs56.projects.games.flood_it.*;
 import javax.swing.*;

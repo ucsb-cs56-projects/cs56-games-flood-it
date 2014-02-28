@@ -1,5 +1,5 @@
-//edu.ucsb.cs56.projects.games.flood_it.view;
-package edu.ucsb.cs56.projects.games.flood_it.model;
+package edu.ucsb.cs56.projects.games.flood_it.view;
+//package edu.ucsb.cs56.projects.games.flood_it.model;
 //edu.ucsb.cs56.projects.games.flood_it.controller;
 
 import java.awt.Color;
