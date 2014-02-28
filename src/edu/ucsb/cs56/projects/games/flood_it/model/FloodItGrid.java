@@ -52,7 +52,7 @@ public class FloodItGrid {
 		Random r = new Random();
 
     
-    		int r2 = r.nextInt((numColors + 1);
+    		int r2 = r.nextInt((numColors + 1));
 
     		switch(r2){
 			case 0:
@@ -67,6 +67,7 @@ public class FloodItGrid {
 				return yellow;
 			case 5:
 				return red;
+		}
 	
 	}
 
