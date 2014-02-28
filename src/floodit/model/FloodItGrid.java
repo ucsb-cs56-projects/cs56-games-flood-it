@@ -1,6 +1,9 @@
+package floodit.model;
+
 public class FloodItGrid {
      private int rows;
      private int cols;
+
      public FloodItGrid(int r, int c) {
         // set rows and cols here\
 	 rows = r;
@@ -22,4 +25,5 @@ public class FloodItGrid {
     public String toString(){
 	return "FloodItGrid[rows=" + rows + ",cols=" + cols + "]";
 
-    };
+    }
+}
