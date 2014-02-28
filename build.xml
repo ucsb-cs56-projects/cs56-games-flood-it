@@ -3,6 +3,8 @@
   <!-- build.xml for FloodIt, S13, CS56
        name: Sophia Mao
        name: Kai Jann
+
+updated by: Chris Luo & Kevin Briggs
   -->
 
   <property name="projectName" value="FloodIt" />   

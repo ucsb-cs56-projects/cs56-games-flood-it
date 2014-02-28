@@ -6,6 +6,8 @@ import javax.swing.JPanel;
 /** Class for the board of Flood It
   @author Sophia Mao
   @author Kai Jann
+  @author Chris Luo
+  @author Kevin Briggs
 */
 
 //@@@ TODO: implement draw board for the game board

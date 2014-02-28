@@ -10,6 +10,8 @@ import javax.swing.*;
  * 
  * @author Sophia Mao
  * @author Kai Jann
+ @author Chris Luo
+ @author Kevin Briggs
  */
 
 public class FloodItGUI extends JFrame implements ActionListener{
