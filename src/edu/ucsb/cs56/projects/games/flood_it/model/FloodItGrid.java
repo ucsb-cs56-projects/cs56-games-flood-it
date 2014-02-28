@@ -3,7 +3,8 @@ package edu.ucsb.cs56.projects.games.flood_it.model;
 
 
 import java.awt.Color;
-import java.lang.math;
+import java.lang.Math;
+import java.util.*;
 
 /**
  * Class for the grid
@@ -26,8 +27,9 @@ public class FloodItGrid {
     public static final Color yellow = new Color(243, 246, 29);
     public static final Color red = new Color(220, 74, 32);
     public static final Color pink = new Color(237, 112, 161);
+	
 
-
+   public static final Color error = new Color(0,0,0);
 
 
 
@@ -42,8 +44,9 @@ public class FloodItGrid {
 
 	for(int i=0; i<rows; i++)
 		for(int j=0; j<cols; j++)
-			Color[i][j] = randColor();
+			board[i][j] = randColor();
 	 
+	
      }
 
 
@@ -53,7 +56,7 @@ public class FloodItGrid {
 
     
     		int r2 = r.nextInt((numColors + 1));
-
+		
     		switch(r2){
 			case 0:
 				return purple;
@@ -67,7 +70,11 @@ public class FloodItGrid {
 				return yellow;
 			case 5:
 				return red;
+			default: 
+				break;
+	
 		}
+		return error;
 	
 	}
 
