@@ -1,6 +1,9 @@
+
+
 public class FloodItGrid {
      private int rows;
      private int cols;
+
      public FloodItGrid(int r, int c) {
         // set rows and cols here\
 	 rows = r;
