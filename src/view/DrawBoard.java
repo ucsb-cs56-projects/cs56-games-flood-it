@@ -1,6 +1,6 @@
-edu.ucsb.cs56.projects.games.flood_it.view;
-edu.ucsb.cs56.projects.games.flood_it.model;
-edu.ucsb.cs56.projects.games.flood_it.controller;
+//edu.ucsb.cs56.projects.games.flood_it.view;
+package edu.ucsb.cs56.projects.games.flood_it.model;
+//edu.ucsb.cs56.projects.games.flood_it.controller;
 
 import java.awt.Color;
 public class DrawBoard {

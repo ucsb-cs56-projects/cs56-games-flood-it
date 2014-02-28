@@ -1,6 +1,6 @@
-edu.ucsb.cs56.projects.games.flood_it.view;
-edu.ucsb.cs56.projects.games.flood_it.model;
-edu.ucsb.cs56.projects.games.flood_it.controller;
+package edu.ucsb.cs56.projects.games.flood_it.view;
+//edu.ucsb.cs56.projects.games.flood_it.model;
+//edu.ucsb.cs56.projects.games.flood_it.controller;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -42,7 +42,7 @@ public class FloodItGUI extends JFrame implements ActionListener{
     //initialize JFrame
     public void init(){
 	//set JFrame properties
-	frame = new JFrame("Flood It! by Sophia Mao and Kai Jann");
+	frame = new JFrame("Flood It! by Sophia Mao and Kai Jann and Kevin Briggs and Chris Luo");
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	frame.setSize(1000,800);
 	
