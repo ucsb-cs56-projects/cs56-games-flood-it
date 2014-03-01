@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 
-/** Test class for Flood It
+/** Test class for Flood It Grid
 
     @author Chris Luo
     @author Kevin Briggs
@@ -16,7 +16,7 @@ import static org.junit.Assert.assertFalse;
 public class FloodItGridTest{
 
 /** Test case for constructor
-    @see FloodItGrid#FloodItGrid()
+    @see FloodItGrid#FloodItGrid
 */
 
 @Test
@@ -26,17 +26,17 @@ public void test_constructor(){
     assertEquals(12, g1.getCols());
 }
 
-    /** Test case for getRow method
-	@see FloodItGrid#getRow
+    /** Test case for getRows method
+	@see FloodItGrid#getRows
     */
 
     @Test
-    public void test_getRow(){
+    public void test_getRows(){
 	FloodItGrid g1 = new FloodItGrid(12, 12);
 	assertEquals(12, g1.getRows());
     }
 
-    /** Test case for getCols
+    /** Test case for getCols method
 	@see FloodItGrid#getCols
     */
 
@@ -46,7 +46,7 @@ public void test_constructor(){
 	assertEquals(12, g1.getCols());
     }
 
-    /** Test case for toString
+    /** Test case for toString method
 	@see FloodItGrid#toString
     */
 
