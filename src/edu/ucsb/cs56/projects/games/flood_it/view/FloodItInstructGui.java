@@ -1,3 +1,5 @@
+package edu.ucsb.cs56.projects.games.flood_it.view;
+
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
@@ -11,6 +13,9 @@ import java.io.InputStreamReader;
     Class where Pop-up JFrame for instructions (Flood it) is created.
     @author Sophia Mao
     @version 5/31/13 for proj 2, cs56, S13
+    @author Chris Luo
+    @author Kevin Briggs
+    @version 2/28/14 for proj 1, cs56, W14
 */
 
 public class FloodItInstructGui{

@@ -1,3 +1,5 @@
+package edu.ucsb.cs56.projects.games.flood_it.view;
+
 import java.awt.Color;
 public class DrawBoard {
 

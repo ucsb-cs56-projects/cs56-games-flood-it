@@ -1,3 +1,7 @@
+package floodit.view;
+//edu.ucsb.cs56.projects.games.flood_it.model;
+//edu.ucsb.cs56.projects.games.flood_it.controller;
+
 import java.awt.Color;
 
 import javax.swing.JLabel;
@@ -6,6 +10,8 @@ import javax.swing.JPanel;
 /** Class for the board of Flood It
   @author Sophia Mao
   @author Kai Jann
+  @author Chris Luo
+  @author Kevin Briggs
 */
 
 //@@@ TODO: implement draw board for the game board
@@ -17,7 +23,7 @@ public class FloodItGrid extends JPanel {
 	
     public FloodItGrid(){
     	
-    	label = new JLabel("board will go here");
+    	label = new JLabel("");
     	this.setBackground(Color.MAGENTA);
     	this.add(label);
 
