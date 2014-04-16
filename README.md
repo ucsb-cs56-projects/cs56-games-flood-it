@@ -7,3 +7,9 @@ a color from the four colors and displays it on a Jpanel with the grid layout. A
 was clicked and the amount of turns left will decrease by 1. 
 
 An example of the game 'Floodit' you can play can be found [here](http://floodit.appspot.com/)
+
+project history
+===============
+```
+ W14 | jcneally 4pm | krbriggs, christopherluo | A game where the goal is to get entire board to the same color
+```
