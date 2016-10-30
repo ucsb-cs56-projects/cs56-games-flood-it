@@ -6,7 +6,7 @@ on the bottom until the whole screen becomes one color in a specified number of 
 a color from the four colors and displays it on a Jpanel with the grid layout. As each button is clicked, the block with be repainted with the color that 
 was clicked and the amount of turns left will decrease by 1. 
 
-An example of the game 'Floodit' you can play can be found [here](http://floodit.appspot.com/)
+An example of the game 'Floodit' you can play can be found [here](http://unixpapa.com/floodit/)
 
 project history
 ===============
