@@ -6,8 +6,8 @@ import edu.ucsb.cs56.projects.games.flood_it.model.FloodItGrid;
 
 /**
  * Class for the controller
- * 
- *
+ * Edited by 
+ *@author Dylan Hanson
  * @author Chris Luo
  * @author Kevin Briggs
  */
