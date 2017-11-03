@@ -43,8 +43,10 @@ public class FloodItGUI extends JFrame implements ActionListener{
 	frame = new JFrame("Flood It! by Sophia Mao and Kai Jann and Kevin Briggs and Chris Luo");
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	frame.setSize(1000,800);
+
+	int[][] rands = PopulateGrid(16, 4);
 	
-	gridBoard = new FloodItGrid();
+	gridBoard = new FloodItGrid(rands);
 
 	buttonInstruction = new JButton("Instructions");
 	
@@ -171,6 +173,18 @@ public class FloodItGUI extends JFrame implements ActionListener{
 	    Integer numMoves = new Integer(--MOVES_LEFT);
 	    return numMoves;
 	}
+    }
+    public int[][] PopulateGrid(int dimension, int numColors)
+    {
+	int[][] result = new int[dimension][dimension];
+	for(int i=0; i<dimension; i++)
+	    {
+		for(int j=0; j<dimension; j++)
+		    {
+			result[i][j] = (int)(Math.random()*numColors);
+		    }
+	    }
+	return result;
     }
     
 
