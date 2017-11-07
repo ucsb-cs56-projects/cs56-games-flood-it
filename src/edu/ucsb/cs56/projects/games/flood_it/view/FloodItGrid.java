@@ -17,7 +17,8 @@ import java.util.Random;
 
 public class FloodItGrid extends JPanel {
     
-	private JLabel label;
+    Color[] colors = {Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW};
+    private JLabel label;
 	
     public FloodItGrid(int[][] grid){
     	
@@ -26,7 +27,7 @@ public class FloodItGrid extends JPanel {
     	//this.add(label);
 	this.setLayout(new GridLayout(grid.length,grid.length));
 	//int i=0;
-	Color[] colors = {Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW};
+
 	
 	for(int j=0; j<grid.length; j++){
 	    for(int k=0; k<grid.length; k++){
@@ -36,24 +37,22 @@ public class FloodItGrid extends JPanel {
 		
 	    }
 	}
-		
-	
-	/*{
-		int rand = (int)(Math.random()*4);
-
-
-
-		JPanel test = new JPanel();
-		test.setBackground(colors[rand]);
-		add(test);
-		
-		    //add(new JButton("test"));
-		i++;
-		}*/
-
     }
 
+    public void redrawLabel(int [][] grid){
+	removeAll();
 
+	setLayout(new GridLayout(grid.length, grid.length));
+	for(int j=0; j<grid.length; j++){
+	    for(int k=0; k<grid.length; k++){
+		JPanel current = new JPanel();
+		current.setBackground(colors[grid[j][k]]);
+		add(current);
+	    
+	    }
+	}
+    }
 
-
+		  
+       
 }

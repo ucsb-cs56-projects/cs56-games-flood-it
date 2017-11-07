@@ -32,6 +32,10 @@ public class FloodItGUI extends JFrame implements ActionListener{
     private JPanel buttonPanel;
     private JTextField countdown;
     private JLabel movesLeft;
+
+    //@dhanson
+    private int [][] grid;
+
     
     //static variables
     static Integer MOVES_LEFT = new Integer(25);
@@ -40,13 +44,13 @@ public class FloodItGUI extends JFrame implements ActionListener{
     //initialize JFrame
     public void init(){
 	//set JFrame properties
-	frame = new JFrame("Flood It! by Sophia Mao and Kai Jann and Kevin Briggs and Chris Luo");
+	frame = new JFrame("Flood It! by SM and KJ and KB and CL and DH and DBN");
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	frame.setSize(1000,800);
 
-	int[][] rands = PopulateGrid(16, 4);
+	grid = PopulateGrid(2, 4);
 	
-	gridBoard = new FloodItGrid(rands);
+	gridBoard = new FloodItGrid(grid);
 
 	buttonInstruction = new JButton("Instructions");
 	
@@ -77,7 +81,8 @@ public class FloodItGUI extends JFrame implements ActionListener{
 		    countdown.setText(decrementAMove().toString());
 		    if(MOVES_LEFT != 0)
 			messageArea.append("red \n");
-
+		    makeMove(0);
+		    gridBoard.redrawLabel(grid);//EDITTTTTLMLKMLMLML
 
 		}
 	    });
@@ -92,7 +97,8 @@ public class FloodItGUI extends JFrame implements ActionListener{
 		    countdown.setText(decrementAMove().toString());
 		    if(MOVES_LEFT != 0)
 			messageArea.append("blue \n");
-
+		    makeMove(1);
+		    gridBoard.redrawLabel(grid);
 		}
 	    });
 	
@@ -105,8 +111,9 @@ public class FloodItGUI extends JFrame implements ActionListener{
 		    countdown.setText(decrementAMove().toString());
 		    if(MOVES_LEFT != 0)
 			messageArea.append("green \n");
-
-
+		    
+		    makeMove(2);
+		    gridBoard.redrawLabel(grid);
 		}
 	    });
 	
@@ -119,8 +126,8 @@ public class FloodItGUI extends JFrame implements ActionListener{
 		    countdown.setText(decrementAMove().toString());
 		    if(MOVES_LEFT != 0)
 			messageArea.append("yellow \n");
-
-
+		    makeMove(3);
+		    gridBoard.redrawLabel(grid);
 		}
 	    });
 	
@@ -202,5 +209,19 @@ public class FloodItGUI extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent e) {
 	// TODO Auto-generated method stub
 	
+    }
+ 
+    public void makeMove(int color){
+	int lastColor = grid[0][0];
+	for(int i =0; i< grid.length; i++){
+	    for(int j =0; j<grid[i].length; j++){
+		
+		if (grid[i][j] == lastColor){
+		    grid[i][i] = color;
+		}
+	    }
+	}
+     
+       
     }
 }
