@@ -213,6 +213,8 @@ public class FloodItGUI extends JFrame implements ActionListener{
     }
  
     public void makeMove(int color){
+	floodIt(0,0, color, grid[0][0]);
+	/**
 	int lastColor = grid[0][0];
 	
 	for(int i =0; i< grid.length; i++){
@@ -227,18 +229,31 @@ public class FloodItGUI extends JFrame implements ActionListener{
 			    grid[i][j] = color;
 			}
 		    }
-		    else if(i>0){
+		    if(i>0){
 			if(grid[i-1][j] == color){
 			    grid[i][j] = color;
 			}
 		    }
+		    
 		}
 	       
 	    }
-	   
-	}
-     
-       
-	
+	    }
+	*/
     }
+                 	
+    
+
+    public void floodIt(int x, int y, int newColor, int oldColor)
+    {
+	if(x<0 || y<0 || x>=grid.length || y>= grid.length) return;
+	if(grid[x][y] != oldColor) return;
+	grid[x][y] = newColor;
+	floodIt(x, y+1, newColor, oldColor);
+	floodIt(x, y-1, newColor, oldColor);
+	floodIt(x+1, y, newColor, oldColor);
+	floodIt(x-1, y, newColor, oldColor);
+	return;
+    }
+    
 }
