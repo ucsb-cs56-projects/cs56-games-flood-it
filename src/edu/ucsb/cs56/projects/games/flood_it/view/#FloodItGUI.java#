@@ -222,20 +222,18 @@ public class FloodItGUI extends JFrame implements ActionListener{
 		    if(i==0 && j==0){
 			grid[i][j] = color;//trivial case
 		    }
-		    if(j>0){
-			if(grid[i][j-1] == color){
-			    grid[i][j] = color;
-			}
+		    if((j>0) && (grid[i][j-1] == color)){
+			grid[i][j] = color;
+			
 		    }
-		    else if(i>0){
-			if(grid[i-1][j] == color){
-			    grid[i][j] = color;
-			}
+		    if(i>0 && grid[i-1][j] == color){
+			grid[i][j] = color;
 		    }
+		    else break;		    
 		}
 	       
 	    }
-	   
+		
 	}
      
        
