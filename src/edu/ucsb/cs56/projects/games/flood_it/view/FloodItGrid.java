@@ -17,10 +17,10 @@ import java.util.Random;
 
 public class FloodItGrid extends JPanel {
     
-    Color[] colors = {Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW};
+    
     private JLabel label;
 	
-    public FloodItGrid(int[][] grid){
+    public FloodItGrid(int[][] grid, Color[] colors){
     	
     	label = new JLabel("test");
     	//this.setBackground(Color.MAGENTA);
@@ -39,7 +39,7 @@ public class FloodItGrid extends JPanel {
 	}
     }
 
-    public void redrawLabel(int [][] grid){
+    public void redrawLabel(int [][] grid, Color[] colors){
 	removeAll();
 
 	setLayout(new GridLayout(grid.length, grid.length));

@@ -36,11 +36,18 @@ public class FloodItGUI extends JFrame implements ActionListener{
 
     //@dhanson
     private int [][] grid;
-
-    
+    private final Color[] colors = {Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW, Color.MAGENTA, Color.CYAN,Color.ORANGE,Color.BLACK};
+    //private ArrayList<JButton> buttons = new ArrayList<JButton>();
+    private String[] colorNames = {"Red","Blue","Green","Yellow","Magenta","Cyan","Orange","Black"};
+    private int numColors;
+    private int dimension;
     //static variables
     static Integer MOVES_LEFT = new Integer(25);
-	
+
+    public FloodItGUI(int dimension, int numColors){
+	this.dimension = dimension;
+	this.numColors = numColors;
+    }
 
     //initialize JFrame
     public void init(){
@@ -49,9 +56,9 @@ public class FloodItGUI extends JFrame implements ActionListener{
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	frame.setSize(1000,800);
 
-	grid = PopulateGrid(8, 4);
+	grid = PopulateGrid(dimension, numColors);
 	
-	gridBoard = new FloodItGrid(grid);
+	gridBoard = new FloodItGrid(grid, colors);
 
 	buttonInstruction = new JButton("Instructions");
 	
@@ -72,9 +79,29 @@ public class FloodItGUI extends JFrame implements ActionListener{
 	//add Countdown components to buttonPanel
 	buttonPanel.add(movesLeft);
 	buttonPanel.add(countdown);
+
+	//ALL button properties
+	for(int i=0; i<numColors; i++)
+	{
+	    final int k = i;
+	    JButton currentButton = new JButton(colorNames[i]);
+	    currentButton.setBackground(colors[i]);
+	    buttonPanel.add(currentButton);
+	    currentButton.addActionListener(new ActionListener(){
+		    public void actionPerformed(ActionEvent e){
+			countdown.setText(decrementAMove().toString());
+			if(MOVES_LEFT != 0)
+			    messageArea.append(colorNames[k] +"\n");
+			floodIt(0,0,k,grid[0][0]);
+			gridBoard.redrawLabel(grid,colors);
+		    }
+		});
+	}
+		
+	
 	
 	//buttonRed properties
-	buttonRed = new JButton("Red");
+	/*buttonRed = new JButton("Red");
 	buttonRed.setBackground(Color.RED);
 	buttonPanel.add(buttonRed);
 	buttonRed.addActionListener(new ActionListener(){
@@ -82,7 +109,7 @@ public class FloodItGUI extends JFrame implements ActionListener{
 		    countdown.setText(decrementAMove().toString());
 		    if(MOVES_LEFT != 0)
 			messageArea.append("red \n");
-		    makeMove(0);
+		    floodIt(0,0,0, grid[0][0]); 
 		    gridBoard.redrawLabel(grid);//EDITTTTTLMLKMLMLML
 
 		}
@@ -98,10 +125,13 @@ public class FloodItGUI extends JFrame implements ActionListener{
 		    countdown.setText(decrementAMove().toString());
 		    if(MOVES_LEFT != 0)
 			messageArea.append("blue \n");
-		    makeMove(1);
+		    floodIt(0,0,1,grid[0][0]);
 		    gridBoard.redrawLabel(grid);
 		}
 	    });
+
+	
+
 	
 	//buttonGreen properties
 	buttonGreen = new JButton("Green");
@@ -113,7 +143,7 @@ public class FloodItGUI extends JFrame implements ActionListener{
 		    if(MOVES_LEFT != 0)
 			messageArea.append("green \n");
 		    
-		    makeMove(2);
+		    floodIt(0,0,2,grid[0][0]);
 		    gridBoard.redrawLabel(grid);
 		}
 	    });
@@ -127,12 +157,12 @@ public class FloodItGUI extends JFrame implements ActionListener{
 		    countdown.setText(decrementAMove().toString());
 		    if(MOVES_LEFT != 0)
 			messageArea.append("yellow \n");
-		    makeMove(3);
+		    floodIt(0,0,3,grid[0][0]);
 		    gridBoard.redrawLabel(grid);
 		}
 	    });
 	
-	
+	*/
 	
 	
 	//add buttonPanel to South component in BorderLayout of JFrame
@@ -199,8 +229,16 @@ public class FloodItGUI extends JFrame implements ActionListener{
 
     //main method for Game Flood It
     public static void main(String args[]){
+	//maybe error prone
+	/**
+	int dimension = (int) args[0];
+	int numColors = (int) args[1];
+	*/
+	int dimension = 14;
+	int numColors = 3;
+	    
 
-	FloodItGUI game = new FloodItGUI();
+	FloodItGUI game = new FloodItGUI(dimension, numColors);
 	game.run();
 	
 	
@@ -212,36 +250,7 @@ public class FloodItGUI extends JFrame implements ActionListener{
 	
     }
  
-    public void makeMove(int color){
-	floodIt(0,0, color, grid[0][0]);
-	/**
-	int lastColor = grid[0][0];
-	
-	for(int i =0; i< grid.length; i++){
-	    for(int j=0; j< grid.length; j++){
-		if (grid[i][j] == lastColor){
-		    //needs to be last color behind or above or both or 00
-		    if(i==0 && j==0){
-			grid[i][j] = color;//trivial case
-		    }
-		    if(j>0){
-			if(grid[i][j-1] == color){
-			    grid[i][j] = color;
-			}
-		    }
-		    if(i>0){
-			if(grid[i-1][j] == color){
-			    grid[i][j] = color;
-			}
-		    }
-		    
-		}
-	       
-	    }
-	    }
-	*/
-    }
-                 	
+      	
     
 
     public void floodIt(int x, int y, int newColor, int oldColor)
