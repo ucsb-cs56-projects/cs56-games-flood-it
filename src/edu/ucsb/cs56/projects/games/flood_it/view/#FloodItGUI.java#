@@ -42,8 +42,6 @@ public class FloodItGUI extends JFrame implements ActionListener{
     private int numColors;
     private int dimension;
     private Integer MOVES_LEFT;
-    //static variables
-    //static Integer MOVES_LEFT = new Integer(25);
 
     public FloodItGUI(int dimension, int numColors){
 	this.dimension = dimension;
