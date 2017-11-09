@@ -41,8 +41,9 @@ public class FloodItGUI extends JFrame implements ActionListener{
     private String[] colorNames = {"Red","Blue","Green","Yellow","Magenta","Cyan","Orange","Black"};
     private int numColors;
     private int dimension;
+    private Integer MOVES_LEFT;
     //static variables
-    static Integer MOVES_LEFT = new Integer(25);
+    //static Integer MOVES_LEFT = new Integer(25);
 
     public FloodItGUI(int dimension, int numColors){
 	this.dimension = dimension;
@@ -51,6 +52,9 @@ public class FloodItGUI extends JFrame implements ActionListener{
 
     //initialize JFrame
     public void init(){
+	//set MovesLeft (scales number of moves based on number of colors and dimension selected using 25 moves for a 6 color, 14x14 grid as a baseline.
+	MOVES_LEFT = (int)Math.floor(dimension*numColors*25/84); //Thanks, autoboxing!
+	
 	//set JFrame properties
 	frame = new JFrame("Flood It! by SM and KJ and KB and CL and DH and DBN");
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -89,81 +93,22 @@ public class FloodItGUI extends JFrame implements ActionListener{
 	    buttonPanel.add(currentButton);
 	    currentButton.addActionListener(new ActionListener(){
 		    public void actionPerformed(ActionEvent e){
-			countdown.setText(decrementAMove().toString());
-			if(MOVES_LEFT != 0)
+		
+			if(MOVES_LEFT != 0 && !checkWin() && grid[0][0]!=k){
+			    countdown.setText(decrementAMove().toString());
 			    messageArea.append(colorNames[k] +"\n");
-			floodIt(0,0,k,grid[0][0]);
-			gridBoard.redrawLabel(grid,colors);
+			    floodIt(0,0,k,grid[0][0]);
+			    gridBoard.redrawLabel(grid,colors);
+			    if(checkWin())
+				messageArea.append("You Win :D\n");
+			    else if(MOVES_LEFT == 0)
+				messageArea.append("You Lose :(\n");
+			}
+			else if(MOVES_LEFT != 0&&!checkWin())
+			    messageArea.append("Invalid move.\n");
 		    }
 		});
 	}
-		
-	
-	
-	//buttonRed properties
-	/*buttonRed = new JButton("Red");
-	buttonRed.setBackground(Color.RED);
-	buttonPanel.add(buttonRed);
-	buttonRed.addActionListener(new ActionListener(){
-		public void actionPerformed( ActionEvent e ){
-		    countdown.setText(decrementAMove().toString());
-		    if(MOVES_LEFT != 0)
-			messageArea.append("red \n");
-		    floodIt(0,0,0, grid[0][0]); 
-		    gridBoard.redrawLabel(grid);//EDITTTTTLMLKMLMLML
-
-		}
-	    });
-	
-	//buttonBlue properties
-	buttonBlue = new JButton("Blue");
-	buttonBlue.setBackground(Color.BLUE);
-	buttonBlue.setForeground(Color.WHITE);
-	buttonPanel.add(buttonBlue);
-	buttonBlue.addActionListener(new ActionListener(){
-		public void actionPerformed( ActionEvent e ){
-		    countdown.setText(decrementAMove().toString());
-		    if(MOVES_LEFT != 0)
-			messageArea.append("blue \n");
-		    floodIt(0,0,1,grid[0][0]);
-		    gridBoard.redrawLabel(grid);
-		}
-	    });
-
-	
-
-	
-	//buttonGreen properties
-	buttonGreen = new JButton("Green");
-        buttonGreen.setBackground(Color.GREEN);
-	buttonPanel.add(buttonGreen);
-	buttonGreen.addActionListener(new ActionListener(){
-		public void actionPerformed( ActionEvent e ){
-		    countdown.setText(decrementAMove().toString());
-		    if(MOVES_LEFT != 0)
-			messageArea.append("green \n");
-		    
-		    floodIt(0,0,2,grid[0][0]);
-		    gridBoard.redrawLabel(grid);
-		}
-	    });
-	
-	//buttonYellow properties
-	JButton buttonYellow = new JButton("Yellow");
-        buttonYellow.setBackground(Color.YELLOW);
-       	buttonPanel.add(buttonYellow);
-	buttonYellow.addActionListener(new ActionListener(){
-		public void actionPerformed( ActionEvent e ){
-		    countdown.setText(decrementAMove().toString());
-		    if(MOVES_LEFT != 0)
-			messageArea.append("yellow \n");
-		    floodIt(0,0,3,grid[0][0]);
-		    gridBoard.redrawLabel(grid);
-		}
-	    });
-	
-	*/
-	
 	
 	//add buttonPanel to South component in BorderLayout of JFrame
 	frame.getContentPane().add(BorderLayout.SOUTH,buttonPanel);
@@ -234,8 +179,8 @@ public class FloodItGUI extends JFrame implements ActionListener{
 	int dimension = (int) args[0];
 	int numColors = (int) args[1];
 	*/
-	int dimension = 14;
-	int numColors = 3;
+	int dimension = 144;
+	int numColors = 8;
 	    
 
 	FloodItGUI game = new FloodItGUI(dimension, numColors);
@@ -264,5 +209,12 @@ public class FloodItGUI extends JFrame implements ActionListener{
 	floodIt(x-1, y, newColor, oldColor);
 	return;
     }
-    
+    public boolean checkWin()
+    {
+	for(int i=0; i<grid.length; i++)
+	    for(int j=0; j<grid.length; j++)
+		if(grid[i][j]!=grid[0][0]) return false;
+	return true;
+		
+    }
 }
