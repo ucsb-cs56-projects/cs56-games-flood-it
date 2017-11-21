@@ -41,34 +41,44 @@ public class FloodItGUI extends JFrame implements ActionListener{
     private String[] colorNames = {"Red","Blue","Green","Yellow","Magenta","Cyan","Orange","Black"};
     private int numColors;
     private int dimension;
+    private int difficultyLevel;
     private Integer MOVES_LEFT;
     //static variables
     //static Integer MOVES_LEFT = new Integer(25);
 
-    public FloodItGUI(int dimension, int numColors){
+    public FloodItGUI(int dimension, int numColors, int difficultyLevel){
 	this.dimension = dimension;
 	this.numColors = numColors;
+	this.difficultyLevel = difficultyLevel;
     }
 
     //initialize JFrame
     public void init(){
 	//set MovesLeft (scales number of moves based on number of colors and dimension selected using 25 moves for a 6 color, 14x14 grid as a baseline.
-	MOVES_LEFT = (int)Math.floor(dimension*numColors*25/84); //Thanks, autoboxing!
-	
+	MOVES_LEFT = (int)Math.floor(dimension*numColors*25/84);//Thanks, autoboxing!
+	if(difficultyLevel == 1) MOVES_LEFT = (int)Math.floor(MOVES_LEFT*.8);
+	if(difficultyLevel == 3) MOVES_LEFT = /*Math.min(
+						       (int)(Math.floor(MOVES_LEFT*Math.sqrt(dimension)*Math.pow(numColors,.25)/1.5)),
+						       (int)( MOVES_LEFT*Math.sqrt(dimension)*Math.sqrt(numColors)/2));*/
+				     (int)Math.floor(MOVES_LEFT * 2.33);
 	//set JFrame properties
 	frame = new JFrame("Flood It! by SM and KJ and KB and CL and DH and DBN");
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	frame.setSize(1000,800);
 
-	grid = PopulateGrid(dimension, numColors);
+	grid = PopulateGrid(dimension, numColors, difficultyLevel);
 	
 	gridBoard = new FloodItGrid(grid, colors);
 
 	buttonInstruction = new JButton("Instructions");
 	
 	//set JTextArea properties for the big message returning box
- 	messageArea = new JTextArea(50,20);
+
+	messageArea = new JTextArea(40,20);
 	messageArea.setEditable(false);
+
+	JScrollPane messageScroller = new JScrollPane(messageArea);
+	messageScroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
 	//set JTextField properties for countdown box
 	countdown = new JTextField(MOVES_LEFT.toString(),2);
@@ -118,7 +128,7 @@ public class FloodItGUI extends JFrame implements ActionListener{
 	textContainer.setLayout(new BoxLayout(textContainer, BoxLayout.Y_AXIS));
 	
 	//add Components to textContainer
-	textContainer.add(messageArea);
+	textContainer.add(messageScroller);
 	textContainer.add(buttonInstruction);
 	buttonInstruction.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent e){
@@ -157,9 +167,43 @@ public class FloodItGUI extends JFrame implements ActionListener{
 	    return numMoves;
 	}
     }
-    public int[][] PopulateGrid(int dimension, int numColors)
+    public int[][] PopulateGrid(int dimension, int numColors, int difficultyLevel)
     {
+	if(difficultyLevel == 1)
+	    return PopulateGridEasy(dimension,numColors);
+	if(difficultyLevel == 2)
+	    return PopulateGridMedium(dimension,numColors);
+	if(difficultyLevel == 3)
+	    return PopulateGridHard(dimension,numColors);
+	return PopulateGridMedium(dimension,numColors);
+    }
+    public int[][] PopulateGridEasy(int dimension, int numColors)
+    {
+	int previousColor = (int)(Math.random()*numColors);
 	int[][] result = new int[dimension][dimension];
+	for(int i=0; i<dimension; i++)
+	    {
+		for(int j=0; j<dimension; j++)
+		    {
+			if(Math.random()<.5)
+			{
+			    previousColor = (int)(Math.random()*numColors);
+			}
+			else if(Math.random()<.5)
+			{
+			    if(i>1)
+				previousColor = result[i-1][j];
+			}
+			result[i][j] = previousColor;
+		    }
+	    }
+	return result;
+
+
+    }
+    public int[][] PopulateGridMedium(int dimension, int numColors)
+    {
+      	int[][] result = new int[dimension][dimension];
 	for(int i=0; i<dimension; i++)
 	    {
 		for(int j=0; j<dimension; j++)
@@ -168,9 +212,42 @@ public class FloodItGUI extends JFrame implements ActionListener{
 		    }
 	    }
 	return result;
-    }
-    
 
+    }
+    public int[][] PopulateGridHard(int dimension, int numColors)
+    {
+	int currentColor = (int)(Math.random()*numColors);
+	int [][] result = new int[dimension][dimension];
+	for(int i=0; i<dimension; i++)
+	    {
+		for(int j=0; j<dimension; j++)
+		    {
+			if(i==0&&j==0) result[i][j] = (int)(Math.random()*numColors);
+			if(i!=0 && j!=0)
+			    {
+				while(currentColor == result[i-1][j] || currentColor == result[i][j-1])
+				    currentColor = (int) (Math.random()*numColors);
+				result[i][j] = currentColor;
+			    }
+			else if(i!=0)
+			    {
+				while(currentColor == result[i-1][j])
+				    currentColor = (int) (Math.random()*numColors);
+				result[i][j] = currentColor;
+			    }
+			else if(j!=0)
+			    {
+				while(currentColor == result[i][j-1])
+				      currentColor = (int)(Math.random()*numColors);
+				result[i][j] = currentColor;
+			    }
+			    
+		    }
+		
+	    }
+	return result;
+
+    }
 
     //main method for Game Flood It
     public static void main(String args[]){
@@ -181,9 +258,9 @@ public class FloodItGUI extends JFrame implements ActionListener{
 	*/
 	int dimension = 14;
 	int numColors = 8;
-	    
+	int difficultyLevel = 3;
 
-	FloodItGUI game = new FloodItGUI(dimension, numColors);
+	FloodItGUI game = new FloodItGUI(dimension, numColors, difficultyLevel);
 	game.run();
 	
 	
