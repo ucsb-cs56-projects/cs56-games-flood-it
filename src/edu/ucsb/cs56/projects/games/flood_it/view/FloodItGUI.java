@@ -128,7 +128,8 @@ public class FloodItGUI extends JFrame implements ActionListener{
 	textContainer.setLayout(new BoxLayout(textContainer, BoxLayout.Y_AXIS));
 	
 	//add Components to textContainer
-	textContainer.add(messageScroller);
+	//textContainer.add(messageScroller);
+	textContainer.add(messageArea);
 	textContainer.add(buttonInstruction);
 	buttonInstruction.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent e){
