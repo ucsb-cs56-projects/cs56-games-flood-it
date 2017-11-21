@@ -1,4 +1,11 @@
 Instructions
 -----------------------------------------------------------------
 
-update later depending on the Game interface.
+
+The objective of the game is to fill the whole board with one color within the allotted number of turns.
+
+
+The game is played by selecting a color to fill the top-left cell with. This will also change all of the cells that form a contiguous region with the top-left corner's current color to the selected color. Each time a color is selected, one turn is consumed. The starting number of turns is calculated based on dimensions, color, and difficulty level.
+
+
+The game has 3 variables that are set on startup from the command line: dimension, number of colors, and difficulty level. Dimension chooses the length and width of the board, and must be between 4 and 16. Number of colors must be between 3 and 8. Difficulty level controls the algorithm to fill the board. Easy (1) will readily form contiguous regions of a single color. Medium will randomly choose a fully random layout. Hard will ensure that no cell borders another cell of its own color.
