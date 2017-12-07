@@ -1,4 +1,4 @@
-games-flood-it
+# games-flood-it
 ==============
 This game starts off with the initial grid of multi colored pixels with color selections on the bottom panel that match the colors in the grid. 
 
@@ -7,6 +7,9 @@ The purpose of the game is to, starting from the top left corner of the grid, co
 The grid is filled with random colors using one of 3 algorithms selected by difficulty, where easy gives fills the grid with some contiguous areas to begin with, medium fills the grid with a fully random distribution of colors, and hard fills the grid  in a manner that ensures that no cell will border a cell with the same color.
 
 When a button is clicked, the top-left cell and any cells currently forming a contiguous region with its color will be repainted with that color and the amount of turns left will decrease by 1. 
+
+
+# Final notes from F17
 
 Currently almost all of the code lives in FloodItGUI.java. This could be refactored to make an object for the grid to make the code more readable and/or robust in the future.
 
