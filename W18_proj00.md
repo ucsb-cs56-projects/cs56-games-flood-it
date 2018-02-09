@@ -1,14 +1,18 @@
 * (a) A game where the board starts covered randomly with different colors. The objective is to fill the board with one color.
 
 * (b) As a player, I can input the board size, the number of colors, and select from three difficulties to generate a game board.
-As a player, I can click buttons with label of color names so that consecutive blocks of the same color starting form the top left are flipped into the selected color.
-As a player, I can click the "instructions" button to open a separate window containing a description of the rules of the game.
+
+  As a player, I can click buttons with label of color names so that consecutive blocks of the same color starting form the top left are flipped into the selected color.
+
+  As a player, I can click the "instructions" button to open a separate window containing a description of the rules of the game.
 
 * (c) The game runs with no noticeable bugs. The user is able to play a complete game with custom parameters.
 
 * (d) As a player, I want to be able to click on an actual square and have the program behave as though I clicked the button corresponding to the color of the selected square.
-As a player, I want to be able to have a complete graphical interface without having to deal with command line.
-As a player, I want to be presented with options after the game ends so that I can choose to exit or replay the game.
+
+  As a player, I want to be able to have a complete graphical interface without having to deal with command line.
+
+  As a player, I want to be presented with options after the game ends so that I can choose to exit or replay the game.
 
 * (e) The README.md describes the game in a good way and includes final notes from the F17 contributors. Things that it lacks may include instructions for running the program and a picture to illustrate what the program looks like. The title for the game description may also need to be updated.
 
