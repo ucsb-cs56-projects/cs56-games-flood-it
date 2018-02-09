@@ -28,6 +28,7 @@ The README.md describes the game in a good way and includes final notes from the
   If it’s based on Ant, Are there targets that need descriptions? Is there old legacy JWS stuff that needs to be removed? (More on this below).
   It it’s based on Maven or Gradle, is there sufficient documentation in the README.md that someone new to those tools has the information they need to get started?
 
+The project is based on Ant and there are descriptions for all of the targets. However there are some old JWS stuff that would need to be removed.
 
 
 (g) (20 pts) An assessment of the current “issues”. Are there enough issues that you could earn 1000 points by working on this project? Are the issues clear in terms of what the expectations are?
@@ -36,11 +37,13 @@ The issues add up to well above a 1000 points and we have some ideas of our own 
 
 (h) (20 pts) A list of additional issues that you may have added, if any. For each, a link to the issue is good enough.
 
-
+We haven't added any issues of our own yet, but we may do that later.
 
 (i) (100 pts) Most important: an assessment of the actual code. Write a bit about how the code is organized. Are the purposes of the classes, and their methods clear? Is it obvious how the classes relate to one another? Is the code easy to read and understand? If you had to give someone else that was going to work on the code just “one screenful of text” to help that programmer get up to speed quickly, what information would you convey?
 
-The code is functioning and the game is playable. The program consists of three classes: FloodItGUI, FloodItGrid and FloodItInstructGui. Overall the code has plenty of comments and from what we seen so far there it's always pretty clear what the code is doing. With that said, FloodItGUI could use some refactoring to be a bit more reader friendly.
+The code is functioning and the game is playable. The program consists of three classes: FloodItGUI, FloodItGrid and FloodItInstructGui. Overall the code has plenty of comments and from what we've seen so far it's always pretty clear what the code is trying to do. With that said, FloodItGUI could use some refactoring to be a bit more reader friendly. In doing that we could probably get rid of some of the comments using good variable names and creating help methods.
+
+FloodItGrid is a extension of JPanel and setting up the grid for the playing field. The FloodItInstructGui is only for the instructions window you can pull up from the game window. All the actual code for how the game works is in FloodItGUI and this makes it quite long and uncomfortable to work with. We would rather have maybe a Controller class where the actual code for the game and how it works is written and then have a separate GUI class for all the graphical stuff.
 
 (j) (40 pts) Related to code quality, but factored out into a separate issue because it is so important: how is the test coverage? Are there JUnit tests at all? If so, how much of the project is covered by testing? Are there opportunities to expand test coverage, and if so, how would you go about it?
 
