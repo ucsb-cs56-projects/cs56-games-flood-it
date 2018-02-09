@@ -19,7 +19,6 @@ As a player, I want to be presented with options after the game ends so that I c
 * (h) We haven't added any issues of our own yet, but we may do that later.
 
 * (i) The code is functioning and the game is playable. The program consists of three classes: FloodItGUI, FloodItGrid and FloodItInstructGui. In general the code has plenty of comments and from what we've seen so far it's always pretty clear what the code is trying to do. With that said, FloodItGUI could use some refactoring to be a bit more reader friendly. In doing that we could probably get rid of some of the comments using good variable names and creating help methods, in line with the tips we got on refactoring from our guest lecturer.
-
 The FloodItGrid class is a extension of JPanel and setting up the grid for the playing field. The FloodItInstructGui class is only for the instructions window you can pull up from the game window. All the actual code for how the game works is in FloodItGUI together with most of the code for graphics. This makes it quite long and uncomfortable to work with. We would rather have maybe a Controller class where the actual code for the game and how it works is written and then have a separate GUI class for all the graphical stuff.
 
 * (j) There are no tests at all, so we have some work to do there.
