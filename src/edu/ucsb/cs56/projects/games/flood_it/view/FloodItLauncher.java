@@ -27,16 +27,17 @@ public class FloodItLauncher {
         System.out.println("Enter the number of colors you want: (between 3 and 8)");
         numColors = S.nextInt();
         while (numColors < 3 || numColors > 8) {
-            numColors = S.nextInt();
             System.out.println("Invalid input");
+            numColors = S.nextInt();
         }
         System.out.println("Enter 1 for easy, 2 for medium, 3 for hard.");
         difficultyLevel = S.nextInt();
         while (difficultyLevel < 1 || difficultyLevel > 3) {
-            difficultyLevel = S.nextInt();
             System.out.println("Invalid input");
+            difficultyLevel = S.nextInt();
         }
-        FloodItGUI game = new FloodItGUI(dimension, numColors, difficultyLevel);
+        FloodItController controller = new FloodItController(dimension, numColors, difficultyLevel);
+        FloodItGUI game = new FloodItGUI(controller);
         game.init();
     }
 

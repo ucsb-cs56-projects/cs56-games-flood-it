@@ -4,7 +4,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-import java.util.Scanner;
 
 
 /**
@@ -22,6 +21,7 @@ public class FloodItGUI extends JFrame {
 
     //private variables for all the GUI components
 
+    private FloodItController controller;
     private JFrame frame;
     private Container textContainer;
     private FloodItGrid gridBoard;
@@ -35,28 +35,24 @@ public class FloodItGUI extends JFrame {
     private final Color[] colors = {Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW,
             Color.MAGENTA, Color.CYAN, Color.ORANGE, Color.BLACK};
     private String[] colorNames = {"Red", "Blue", "Green", "Yellow", "Magenta", "Cyan", "Orange", "Black"};
-    private int numColors;
-    private int dimension;
-    private int difficultyLevel;
     private Integer MOVES_LEFT;
 
     /**
      * FloodItGUI constructor creates an instance of the game
      *
-     * @param dimension       the grid will be dimension x dimension
-     * @param numColors       the number of colors available
-     * @param difficultyLevel how difficult the game is
+     * @param controller
      */
-    public FloodItGUI(int dimension, int numColors, int difficultyLevel) {
-        this.dimension = dimension;
-        this.numColors = numColors;
-        this.difficultyLevel = difficultyLevel;
+    public FloodItGUI(FloodItController controller) {
+        this.controller = controller;
     }
 
     /**
      * init initializes the game and draws the board.
      */
     public void init() {
+        int dimension = controller.getDimension();
+        int numColors = controller.getNumColors();
+        int difficultyLevel = controller.getDifficultyLevel();
         //set MovesLeft (scales number of moves based on number of colors and dimension
         //selected using 25 moves for a 6 color, 14x14 grid as a baseline.
         MOVES_LEFT = (int) Math.floor(dimension * numColors * 25 / 84);//Thanks, autoboxing!
@@ -66,8 +62,7 @@ public class FloodItGUI extends JFrame {
         frame = new JFrame("Flood It! by SM and KJ and KB and CL and DH and DBN");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1000, 800);
-        FloodItController controller = new FloodItController(dimension, numColors, difficultyLevel);
-        grid = PopulateGrid(dimension, numColors, difficultyLevel);
+        grid = controller.populateGrid(dimension, numColors, difficultyLevel);
         gridBoard = new FloodItGrid(grid, colors);
         buttonInstruction = new JButton("Instructions");
         //set JTextArea properties for the big message returning box
@@ -93,16 +88,16 @@ public class FloodItGUI extends JFrame {
             buttonPanel.add(currentButton);
             currentButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    if (MOVES_LEFT != 0 && !checkWin() && grid[0][0] != k) {
+                    if (MOVES_LEFT != 0 && !controller.checkWin() && grid[0][0] != k) {
                         countdown.setText(decrementAMove().toString());
                         messageArea.append(colorNames[k] + "\n");
-                        floodIt(0, 0, k, grid[0][0]);
+                        controller.floodIt(0, 0, k, grid[0][0]);
                         gridBoard.redrawLabel(grid, colors);
-                        if (checkWin())
+                        if (controller.checkWin())
                             messageArea.append("You Win :D\n");
                         else if (MOVES_LEFT == 0)
                             messageArea.append("You Lose :(\n");
-                    } else if (MOVES_LEFT != 0 && !checkWin())
+                    } else if (MOVES_LEFT != 0 && !controller.checkWin())
                         messageArea.append("Invalid move.\n");
                 }
             });

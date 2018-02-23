@@ -2,6 +2,10 @@ package edu.ucsb.cs56.projects.games.flood_it.view;
 
 public class FloodItController {
 
+    private int numColors;
+    private int dimension;
+    private int difficultyLevel;
+
     private int[][] grid;
 
     /**
@@ -11,38 +15,38 @@ public class FloodItController {
      * @param numColors       the number of colors available
      * @param difficultyLevel how difficult the game is
      */
-    public FloodItGUI(int dimension, int numColors, int difficultyLevel) {
+    public FloodItController(int dimension, int numColors, int difficultyLevel) {
         this.dimension = dimension;
         this.numColors = numColors;
         this.difficultyLevel = difficultyLevel;
     }
 
     /**
-     * PopulateGrid populates the grid of a given size and difficulty level
+     * populateGrid populates the grid of a given size and difficulty level
      *
      * @param dimension       the grid will be dimension x dimension
      * @param numColors       the number of colors in the grid
      * @param difficultyLevel a number 1,2,3 representing easy medium or hard
      * @return dimensionxdimension matrix of ints represnting the game board
      */
-    public int[][] PopulateGrid(int dimension, int numColors, int difficultyLevel) {
+    public int[][] populateGrid(int dimension, int numColors, int difficultyLevel) {
         if (difficultyLevel == 1)
-            return PopulateGridEasy(dimension, numColors);
+            return populateGridEasy(dimension, numColors);
         if (difficultyLevel == 2)
-            return PopulateGridMedium(dimension, numColors);
+            return populateGridMedium(dimension, numColors);
         if (difficultyLevel == 3)
-            return PopulateGridHard(dimension, numColors);
-        return PopulateGridMedium(dimension, numColors);
+            return populateGridHard(dimension, numColors);
+        return populateGridMedium(dimension, numColors);
     }
 
     /**
-     * PopulateGridEasy populates an easy grid of a given size
+     * populateGridEasy populates an easy grid of a given size
      *
      * @param dimension the grid will be dimension x dimension
      * @param numColors the number of colors in the grid
      * @return dimensionxdimension matrix of ints represnting the game board
      */
-    public int[][] PopulateGridEasy(int dimension, int numColors) {
+    public int[][] populateGridEasy(int dimension, int numColors) {
         int previousColor = (int) (Math.random() * numColors);
         int[][] result = new int[dimension][dimension];
         for (int i = 0; i < dimension; i++) {
@@ -60,13 +64,13 @@ public class FloodItController {
     }
 
     /**
-     * PopulateGridEasy populates a medium grid of a given size
+     * populateGridEasy populates a medium grid of a given size
      *
      * @param dimension the grid will be dimension x dimension
      * @param numColors the number of colors in the grid
      * @return dimensionxdimension matrix of ints represnting the game board
      */
-    public int[][] PopulateGridMedium(int dimension, int numColors) {
+    public int[][] populateGridMedium(int dimension, int numColors) {
         int[][] result = new int[dimension][dimension];
         for (int i = 0; i < dimension; i++) {
             for (int j = 0; j < dimension; j++) {
@@ -78,13 +82,13 @@ public class FloodItController {
 
 
     /**
-     * PopulateGridEasy populates a hard grid of a given size
+     * populateGridEasy populates a hard grid of a given size
      *
      * @param dimension the grid will be dimension x dimension
      * @param numColors the number of colors in the grid
      * @return dimensionxdimension matrix of ints represnting the game board
      */
-    public int[][] PopulateGridHard(int dimension, int numColors) {
+    public int[][] populateGridHard(int dimension, int numColors) {
         int currentColor = (int) (Math.random() * numColors);
         int[][] result = new int[dimension][dimension];
         for (int i = 0; i < dimension; i++) {
@@ -140,5 +144,17 @@ public class FloodItController {
                 if (grid[i][j] != grid[0][0]) return false;
         return true;
 
+    }
+
+    public int getDifficultyLevel() {
+        return difficultyLevel;
+    }
+
+    public int getDimension() {
+        return dimension;
+    }
+
+    public int getNumColors() {
+        return numColors;
     }
 }
