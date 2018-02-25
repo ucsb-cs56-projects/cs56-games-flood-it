@@ -1,5 +1,11 @@
 *.class
 
+.DS_Store
+.idea/
+.metadata/
+cs56-games-flood-it.iml
+out/
+
 # Package Files #
 *.war
 *.ear

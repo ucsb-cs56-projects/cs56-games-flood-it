@@ -6,7 +6,11 @@ public class FloodItLauncher {
 
 
     /**
+     * Class for the Flood it game Launcher
      * Main method for the game
+     *
+     * @author Gustav Schoelin
+     * @author Karl Wang
      */
     public static void main(String args[]) {
         //maybe error prone

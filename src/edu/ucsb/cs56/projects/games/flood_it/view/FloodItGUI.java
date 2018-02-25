@@ -8,7 +8,6 @@ import javax.swing.*;
 
 /**
  * Class for the Flood it game JFrame
- * includes the main method
  *
  * @author Daniel Ben-Naim
  * @author Dylan Hanson
@@ -16,6 +15,8 @@ import javax.swing.*;
  * @author Kai Jann
  * @author Chris Luo
  * @author Kevin Briggs
+ * @author Gustav Schoelin
+ * @author Karl Wang
  */
 public class FloodItGUI extends JFrame {
 
@@ -31,11 +32,9 @@ public class FloodItGUI extends JFrame {
     private JPanel buttonPanel;
     private JTextField countdown;
     private JLabel movesLeft;
-    private int[][] grid;
     private final Color[] colors = {Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW,
             Color.MAGENTA, Color.CYAN, Color.ORANGE, Color.BLACK};
     private String[] colorNames = {"Red", "Blue", "Green", "Yellow", "Magenta", "Cyan", "Orange", "Black"};
-    private Integer MOVES_LEFT;
 
     /**
      * FloodItGUI constructor creates an instance of the game
@@ -50,20 +49,11 @@ public class FloodItGUI extends JFrame {
      * init initializes the game and draws the board.
      */
     public void init() {
-        int dimension = controller.getDimension();
-        int numColors = controller.getNumColors();
-        int difficultyLevel = controller.getDifficultyLevel();
-        //set MovesLeft (scales number of moves based on number of colors and dimension
-        //selected using 25 moves for a 6 color, 14x14 grid as a baseline.
-        MOVES_LEFT = (int) Math.floor(dimension * numColors * 25 / 84);//Thanks, autoboxing!
-        if (difficultyLevel == 1) MOVES_LEFT = (int) Math.floor(MOVES_LEFT * .8);
-        if (difficultyLevel == 3) MOVES_LEFT = (int) Math.floor(MOVES_LEFT * 2.33);
         //set JFrame properties
-        frame = new JFrame("Flood It! by SM and KJ and KB and CL and DH and DBN");
+        frame = new JFrame("Flood It! by SM and KJ and KB and CL and DH and DBN and GS and KW");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1000, 800);
-        grid = controller.populateGrid(dimension, numColors, difficultyLevel);
-        gridBoard = new FloodItGrid(grid, colors);
+        gridBoard = new FloodItGrid(controller.getGrid(), colors);
         buttonInstruction = new JButton("Instructions");
         //set JTextArea properties for the big message returning box
         messageArea = new JTextArea(40, 20);
@@ -71,33 +61,33 @@ public class FloodItGUI extends JFrame {
         JScrollPane messageScroller = new JScrollPane(messageArea);
         messageScroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         //set JTextField properties for countdown box
-        countdown = new JTextField(MOVES_LEFT.toString(), 2);
+        countdown = new JTextField(controller.getMovesLeft().toString(), 2);
         countdown.setEditable(false);
         //JLabel for the countdown JTextArea
-        movesLeft = new JLabel("moves left:");
+        movesLeft = new JLabel("Moves left:");
         //Panel that holds the color buttons and countdown
         buttonPanel = new JPanel();
         //add Countdown components to buttonPanel
         buttonPanel.add(movesLeft);
         buttonPanel.add(countdown);
         //ALL button properties
-        for (int i = 0; i < numColors; i++) {
+        for (int i = 0; i < controller.getNumColors(); i++) {
             final int k = i;
             JButton currentButton = new JButton(colorNames[i]);
             currentButton.setBackground(colors[i]);
             buttonPanel.add(currentButton);
             currentButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    if (MOVES_LEFT != 0 && !controller.checkWin() && grid[0][0] != k) {
+                    if (controller.getMovesLeft() != 0 && !controller.checkWin() && controller.getGrid()[0][0] != k) {
                         countdown.setText(decrementAMove().toString());
                         messageArea.append(colorNames[k] + "\n");
-                        controller.floodIt(0, 0, k, grid[0][0]);
-                        gridBoard.redrawLabel(grid, colors);
+                        controller.floodIt(0, 0, k, controller.getGrid()[0][0]);
+                        gridBoard.redrawLabel(controller.getGrid(), colors);
                         if (controller.checkWin())
                             messageArea.append("You Win :D\n");
-                        else if (MOVES_LEFT == 0)
+                        else if (controller.getMovesLeft() == 0)
                             messageArea.append("You Lose :(\n");
-                    } else if (MOVES_LEFT != 0 && !controller.checkWin())
+                    } else if (controller.getMovesLeft() != 0 && !controller.checkWin())
                         messageArea.append("Invalid move.\n");
                 }
             });
@@ -114,7 +104,7 @@ public class FloodItGUI extends JFrame {
         buttonInstruction.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 instructions = new FloodItInstructGui();
-                messageArea.append("you have clicked the instructions\n");
+                messageArea.append("You have clicked the instructions\n");
             }
         });
         //add textContainer to JFrame
@@ -129,11 +119,12 @@ public class FloodItGUI extends JFrame {
      * @return numMoves an integer representing the number of moves
      */
     public Integer decrementAMove() {
-        if (MOVES_LEFT <= 0) {
+        if (controller.getMovesLeft() <= 0) {
             messageArea.append("Out of moves!\n");
             return 0;
         } else {
-            Integer numMoves = new Integer(--MOVES_LEFT);
+            int numMoves = controller.getMovesLeft() - 1;
+            controller.setMovesLeft(numMoves);
             return numMoves;
         }
     }

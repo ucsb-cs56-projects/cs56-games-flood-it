@@ -1,15 +1,22 @@
 package edu.ucsb.cs56.projects.games.flood_it.view;
 
+/**
+ * Class for Flood it game Controller
+ *
+ * @author Gustav Schoelin
+ * @author Karl Wang
+ */
+
 public class FloodItController {
 
     private int numColors;
     private int dimension;
     private int difficultyLevel;
-
+    private int movesLeft;
     private int[][] grid;
 
     /**
-     * FloodItGUI constructor creates an instance of the game
+     * FloodItController constructor creates an instance of the game
      *
      * @param dimension       the grid will be dimension x dimension
      * @param numColors       the number of colors available
@@ -19,6 +26,12 @@ public class FloodItController {
         this.dimension = dimension;
         this.numColors = numColors;
         this.difficultyLevel = difficultyLevel;
+        populateGrid(dimension, numColors, difficultyLevel);
+        //set MovesLeft (scales number of moves based on number of colors and dimension
+        //selected using 25 moves for a 6 color, 14x14 grid as a baseline.
+        movesLeft = (int) Math.floor(dimension * numColors * 25 / 84);
+        if (difficultyLevel == 1) movesLeft = (int) Math.floor(movesLeft * .8);
+        if (difficultyLevel == 3) movesLeft = (int) Math.floor(movesLeft * 2.33);
     }
 
     /**
@@ -29,14 +42,13 @@ public class FloodItController {
      * @param difficultyLevel a number 1,2,3 representing easy medium or hard
      * @return dimensionxdimension matrix of ints represnting the game board
      */
-    public int[][] populateGrid(int dimension, int numColors, int difficultyLevel) {
+    public void populateGrid(int dimension, int numColors, int difficultyLevel) {
         if (difficultyLevel == 1)
-            return populateGridEasy(dimension, numColors);
+            grid =  populateGridEasy(dimension, numColors);
         if (difficultyLevel == 2)
-            return populateGridMedium(dimension, numColors);
+            grid =  populateGridMedium(dimension, numColors);
         if (difficultyLevel == 3)
-            return populateGridHard(dimension, numColors);
-        return populateGridMedium(dimension, numColors);
+            grid =  populateGridHard(dimension, numColors);
     }
 
     /**
@@ -156,5 +168,17 @@ public class FloodItController {
 
     public int getNumColors() {
         return numColors;
+    }
+
+    public int[][] getGrid() {
+        return grid;
+    }
+
+    public Integer getMovesLeft() {
+        return movesLeft;
+    }
+
+    public void setMovesLeft(int movesLeft) {
+        this.movesLeft = movesLeft;
     }
 }
