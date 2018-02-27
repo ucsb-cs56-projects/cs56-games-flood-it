@@ -93,7 +93,8 @@ public class FloodItStartMenuGUI {
             difficulty = difficultyChooser.getSelectedIndex() + 1;
 
             gameStarted = true;
-            frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+            frame.setVisible(false);
+            frame.dispose();
         }
     }
 
@@ -102,9 +103,4 @@ public class FloodItStartMenuGUI {
             System.exit(0);
         }
     }
-
-//    public int[] getStartValues() {
-//        int[] startValues = new int[3];
-//        //startValues[0] =
-//    }
 }

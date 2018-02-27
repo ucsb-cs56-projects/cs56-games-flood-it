@@ -96,7 +96,7 @@ public class FloodItGUI extends JFrame {
         frame.getContentPane().add(BorderLayout.SOUTH, buttonPanel);
         //Container for text and instructions button
         textContainer = new Container();
-        textContainer.setLayout(new BoxLayout(textContainer, BoxLayout.Y_AXIS));
+        textContainer.setLayout(new BoxLayout(textContainer, BoxLayout.PAGE_AXIS));
         //add Components to textContainer
         //textContainer.add(messageScroller);
         textContainer.add(messageArea);
