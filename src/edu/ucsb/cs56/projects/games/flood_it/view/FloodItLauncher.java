@@ -14,10 +14,17 @@ public class FloodItLauncher {
      */
     public static void main(String args[]) {
         //maybe error prone
-
+        FloodItStartMenuGUI start = new FloodItStartMenuGUI();
+        while(!start.isGameStarted()) {
+            try {
+                Thread.sleep(200);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
         //int dimension = (int) args[0];
         //int numColors = (int) args[1];
-        int dimension;
+       /* int dimension;
         int numColors = 0;
         int difficultyLevel = 0;
         Scanner S = new Scanner(System.in);
@@ -39,8 +46,8 @@ public class FloodItLauncher {
         while (difficultyLevel < 1 || difficultyLevel > 3) {
             System.out.println("Invalid input");
             difficultyLevel = S.nextInt();
-        }
-        FloodItController controller = new FloodItController(dimension, numColors, difficultyLevel);
+        }*/
+        FloodItController controller = new FloodItController(start.getDimensions(), start.getNumColors(), start.getDifficulty());
         FloodItGUI game = new FloodItGUI(controller);
         game.init();
     }

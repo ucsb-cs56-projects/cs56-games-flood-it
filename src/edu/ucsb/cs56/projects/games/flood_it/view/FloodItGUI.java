@@ -26,7 +26,7 @@ public class FloodItGUI extends JFrame {
     private JFrame frame;
     private Container textContainer;
     private FloodItGrid gridBoard;
-    private FloodItInstructGui instructions;
+    private FloodItInstructGUI instructions;
     private JTextArea messageArea;
     private JButton buttonInstruction;
     private JPanel buttonPanel;
@@ -51,7 +51,7 @@ public class FloodItGUI extends JFrame {
     public void init() {
         //set JFrame properties
         frame = new JFrame("Flood It! by SM and KJ and KB and CL and DH and DBN and GS and KW");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(1000, 800);
         gridBoard = new FloodItGrid(controller.getGrid(), colors);
         buttonInstruction = new JButton("Instructions");
@@ -103,7 +103,7 @@ public class FloodItGUI extends JFrame {
         textContainer.add(buttonInstruction);
         buttonInstruction.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                instructions = new FloodItInstructGui();
+                instructions = new FloodItInstructGUI();
                 messageArea.append("You have clicked the instructions\n");
             }
         });

@@ -18,8 +18,8 @@ import java.io.InputStreamReader;
  * @version 2/28/14 for proj 1, cs56, W14
  */
 
-public class FloodItInstructGui {
-    public FloodItInstructGui() {
+public class FloodItInstructGUI {
+    public FloodItInstructGUI() {
 
 
         //initialize and set JFrame visible and size
