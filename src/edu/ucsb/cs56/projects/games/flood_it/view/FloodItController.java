@@ -27,9 +27,12 @@ public class FloodItController {
         this.numColors = numColors;
         this.difficultyLevel = difficultyLevel;
         populateGrid(dimension, numColors, difficultyLevel);
+
         //set MovesLeft (scales number of moves based on number of colors and dimension
         //selected using 25 moves for a 6 color, 14x14 grid as a baseline.
-        movesLeft = (int) Math.floor(dimension * numColors * 25 / 84);
+        int row = dimension;
+        int col = dimension;
+        movesLeft = (int) Math.floor( 25 * (row + col) * numColors / (14 + 14) * 6 );
         if (difficultyLevel == 1) movesLeft = (int) Math.floor(movesLeft * .8);
         if (difficultyLevel == 3) movesLeft = (int) Math.floor(movesLeft * 2.33);
     }
