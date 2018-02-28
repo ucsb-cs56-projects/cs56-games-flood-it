@@ -1,5 +1,8 @@
 package edu.ucsb.cs56.projects.games.flood_it.view;
 
+import java.util.Collections;
+import java.util.Arrays;
+
 /**
  * Class for Flood it game Controller
  *
@@ -27,11 +30,13 @@ public class FloodItController {
         this.numColors = numColors;
         this.difficultyLevel = difficultyLevel;
         populateGrid(dimension, numColors, difficultyLevel);
-        //set MovesLeft (scales number of moves based on number of colors and dimension
-        //selected using 25 moves for a 6 color, 14x14 grid as a baseline.
-        movesLeft = (int) Math.floor(dimension * numColors * 25 / 84);
-        if (difficultyLevel == 1) movesLeft = (int) Math.floor(movesLeft * .8);
-        if (difficultyLevel == 3) movesLeft = (int) Math.floor(movesLeft * 2.33);
+        
+        if (difficultyLevel == 1)
+            this.movesLeft = (int) (calculateBaselineMovesLeft(dimension * dimension, dimension));
+        if (difficultyLevel == 2)
+            this.movesLeft = (int) (calculateBaselineMovesLeft(dimension * dimension, dimension / 2));
+        if (difficultyLevel == 3)
+            this.movesLeft = (int) (calculateBaselineMovesLeft(dimension * dimension, 1));
     }
 
     /**
@@ -76,7 +81,7 @@ public class FloodItController {
     }
 
     /**
-     * populateGridEasy populates a medium grid of a given size
+     * populateGridMedium populates a medium grid of a given size
      *
      * @param dimension the grid will be dimension x dimension
      * @param numColors the number of colors in the grid
@@ -94,7 +99,7 @@ public class FloodItController {
 
 
     /**
-     * populateGridEasy populates a hard grid of a given size
+     * populateGridHard populates a hard grid of a given size
      *
      * @param dimension the grid will be dimension x dimension
      * @param numColors the number of colors in the grid
@@ -124,6 +129,41 @@ public class FloodItController {
         return result;
     }
 
+    /**
+     * calculates the number of moves given to the player
+     * by running random simulations on the grid
+     * the average of the top results is provided as the recommended number of moves
+     * 
+     * @return recommended number of moves, not adjusted for difficulty
+     */
+    private double calculateBaselineMovesLeft(int iterations, int tops){
+        if(tops > iterations){
+            throw new IllegalArgumentException("requesting the average of more result than that is generated");
+        }
+        int[] testResults = new int[iterations]; //the choice of 30 iterations is completely arbitrary. Feel free to change it. 
+
+        for(int i = 0; i < testResults.length; i++){
+            int[][] testGrid = gridCopy(this.grid);
+            int movesUsed = 0;
+            while(!checkWin(testGrid)){
+                int newColor;
+                do{
+                    newColor = (int) (Math.random() * numColors);
+                }while(newColor == testGrid[0][0]);
+                floodIt(0, 0, newColor, testGrid[0][0], testGrid);
+                movesUsed++;
+            }
+            testResults[i] = movesUsed;
+        }
+
+        Arrays.sort(testResults);
+
+        int sum = 0;
+        for (int i = 0; i < tops; i++) {
+            sum += testResults[i];
+        }
+        return (double)sum / tops;
+    }
 
     /**
      * floodIt redraws the matrix after the player makes a move
@@ -135,13 +175,30 @@ public class FloodItController {
      * @param oldColor the color to be repainted
      */
     public void floodIt(int x, int y, int newColor, int oldColor) {
+        floodIt(x, y, newColor, oldColor, this.grid);
+    }
+
+    /**
+     * floodIt redraws the matrix after the player makes a move
+     * it is adapted from Wikipedia's algorithm: en.wikipedia.org/wiki/Flood_fill
+     *
+     * @param x        the x location in the matrix
+     * @param y        the y location in the matrix
+     * @param newColor the new color being painted
+     * @param oldColor the color to be repainted
+     * @param grid     the grid to be worked on
+     */
+    private void floodIt(int x, int y, int newColor, int oldColor, int[][] grid) {
+        if(newColor == oldColor){
+            throw new IllegalArgumentException("newColor and oldColor should not be the same!");
+        }
         if (x < 0 || y < 0 || x >= grid.length || y >= grid.length) return;
         if (grid[x][y] != oldColor) return;
         grid[x][y] = newColor;
-        floodIt(x, y + 1, newColor, oldColor);
-        floodIt(x, y - 1, newColor, oldColor);
-        floodIt(x + 1, y, newColor, oldColor);
-        floodIt(x - 1, y, newColor, oldColor);
+        floodIt(x, y + 1, newColor, oldColor, grid);
+        floodIt(x, y - 1, newColor, oldColor, grid);
+        floodIt(x + 1, y, newColor, oldColor, grid);
+        floodIt(x - 1, y, newColor, oldColor, grid);
         return;
     }
 
@@ -151,11 +208,20 @@ public class FloodItController {
      * @return true if win, false if not.
      */
     public boolean checkWin() {
+        return checkWin(this.grid);
+    }
+
+    /**
+     * checkWin checks if the player has won the game
+     *
+     * @return true if win, false if not.
+     * @param grid     the grid to be worked on
+     */
+    private boolean checkWin(int[][] grid) {
         for (int i = 0; i < grid.length; i++)
             for (int j = 0; j < grid.length; j++)
                 if (grid[i][j] != grid[0][0]) return false;
         return true;
-
     }
 
     public int getDifficultyLevel() {
@@ -180,5 +246,20 @@ public class FloodItController {
 
     public void setMovesLeft(int movesLeft) {
         this.movesLeft = movesLeft;
+    }
+
+    /**
+     * utility method for copying a grid
+     * to be used in calculateMovesLeft()
+     *
+     * @return         a copy of the provided grid
+     * @param grid     the grid to be worked on
+     */
+    private int[][] gridCopy(int[][] grid){
+        int [][] newGrid = new int[grid.length][];
+        for(int i = 0; i < grid.length; i++){
+            newGrid[i] = grid[i].clone();
+        }
+        return newGrid;
     }
 }
