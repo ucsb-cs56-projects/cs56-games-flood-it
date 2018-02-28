@@ -76,7 +76,7 @@ public class FloodItController {
     }
 
     /**
-     * populateGridEasy populates a medium grid of a given size
+     * populateGridMedium populates a medium grid of a given size
      *
      * @param dimension the grid will be dimension x dimension
      * @param numColors the number of colors in the grid
@@ -94,7 +94,7 @@ public class FloodItController {
 
 
     /**
-     * populateGridEasy populates a hard grid of a given size
+     * populateGridHard populates a hard grid of a given size
      *
      * @param dimension the grid will be dimension x dimension
      * @param numColors the number of colors in the grid
