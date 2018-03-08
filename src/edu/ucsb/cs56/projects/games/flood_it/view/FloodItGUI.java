@@ -35,6 +35,7 @@ public class FloodItGUI extends JFrame {
     private final Color[] colors = {Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW,
             Color.MAGENTA, Color.CYAN, Color.ORANGE, Color.BLACK};
     private String[] colorNames = {"Red", "Blue", "Green", "Yellow", "Magenta", "Cyan", "Orange", "Black"};
+    private boolean newGame;
 
     /**
      * FloodItGUI constructor creates an instance of the game
@@ -107,6 +108,15 @@ public class FloodItGUI extends JFrame {
                 messageArea.append("You have clicked the instructions\n");
             }
         });
+        JButton newGameButton = new JButton("New Game");
+        textContainer.add(newGameButton);
+        newGameButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                newGame = true;
+                frame.setVisible(false);
+                frame.dispose();
+            }
+        });
         //add textContainer to JFrame
         frame.getContentPane().add(BorderLayout.EAST, textContainer);
         frame.getContentPane().add(BorderLayout.CENTER, gridBoard);
@@ -129,5 +139,9 @@ public class FloodItGUI extends JFrame {
         }
     }
 
+
+    public boolean isNewGame() {
+        return newGame;
+    }
 
 }

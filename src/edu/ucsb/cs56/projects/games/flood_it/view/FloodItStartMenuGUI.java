@@ -26,6 +26,7 @@ public class FloodItStartMenuGUI {
     public FloodItStartMenuGUI() {
         frame = new JFrame("Welcome to FloodIt!");
         frame.setSize(600, 200);
+        frame.setResizable(false);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/3-frame.getSize().height/2);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -74,6 +75,10 @@ public class FloodItStartMenuGUI {
         return gameStarted;
     }
 
+    public void setGameStarted(boolean gameStarted) {
+        this.gameStarted = gameStarted;
+    }
+
     public int getDimensions() {
         return dimensions;
     }
@@ -86,6 +91,11 @@ public class FloodItStartMenuGUI {
         return difficulty;
     }
 
+    public void show() {
+        frame.setVisible(true);
+        frame.toFront();
+    }
+
     class startButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             dimensions = dimensionsChooser.getSelectedIndex() + 4;
@@ -94,7 +104,7 @@ public class FloodItStartMenuGUI {
 
             gameStarted = true;
             frame.setVisible(false);
-            frame.dispose();
+            //frame.dispose();
         }
     }
 
