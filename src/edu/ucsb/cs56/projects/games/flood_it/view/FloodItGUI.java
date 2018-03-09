@@ -96,12 +96,14 @@ public class FloodItGUI extends JFrame {
         //add buttonPanel to South component in BorderLayout of JFrame
         frame.getContentPane().add(BorderLayout.SOUTH, buttonPanel);
         //Container for text and instructions button
-        textContainer = new Container();
+        textContainer = new JPanel();
         textContainer.setLayout(new BoxLayout(textContainer, BoxLayout.PAGE_AXIS));
         //add Components to textContainer
         //textContainer.add(messageScroller);
         textContainer.add(messageArea);
-        textContainer.add(buttonInstruction);
+		JPanel buttonContainer = new JPanel();
+        buttonContainer.add(buttonInstruction);
+        textContainer.add(buttonContainer);
         buttonInstruction.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 instructions = new FloodItInstructGUI();
@@ -109,7 +111,7 @@ public class FloodItGUI extends JFrame {
             }
         });
         JButton newGameButton = new JButton("New Game");
-        textContainer.add(newGameButton);
+        buttonContainer.add(newGameButton);
         newGameButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 newGame = true;
