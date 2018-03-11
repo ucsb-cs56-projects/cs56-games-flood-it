@@ -24,7 +24,7 @@ public class FloodItGUI extends JFrame {
 
     private FloodItController controller;
     private JFrame frame;
-    private Container textContainer;
+    private JPanel textContainer;
     private FloodItGrid gridBoard;
     private FloodItInstructGUI instructions;
     private JTextArea messageArea;
@@ -35,6 +35,7 @@ public class FloodItGUI extends JFrame {
     private final Color[] colors = {Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW,
             Color.MAGENTA, Color.CYAN, Color.ORANGE, Color.BLACK};
     private String[] colorNames = {"Red", "Blue", "Green", "Yellow", "Magenta", "Cyan", "Orange", "Black"};
+    private boolean newGame;
 
     /**
      * FloodItGUI constructor creates an instance of the game
@@ -95,16 +96,27 @@ public class FloodItGUI extends JFrame {
         //add buttonPanel to South component in BorderLayout of JFrame
         frame.getContentPane().add(BorderLayout.SOUTH, buttonPanel);
         //Container for text and instructions button
-        textContainer = new Container();
+        textContainer = new JPanel();
         textContainer.setLayout(new BoxLayout(textContainer, BoxLayout.PAGE_AXIS));
         //add Components to textContainer
         //textContainer.add(messageScroller);
         textContainer.add(messageArea);
-        textContainer.add(buttonInstruction);
+		JPanel buttonContainer = new JPanel();
+        buttonContainer.add(buttonInstruction);
+        textContainer.add(buttonContainer);
         buttonInstruction.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 instructions = new FloodItInstructGUI();
                 messageArea.append("You have clicked the instructions\n");
+            }
+        });
+        JButton newGameButton = new JButton("New Game");
+        buttonContainer.add(newGameButton);
+        newGameButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                newGame = true;
+                frame.setVisible(false);
+                frame.dispose();
             }
         });
         //add textContainer to JFrame
@@ -129,5 +141,9 @@ public class FloodItGUI extends JFrame {
         }
     }
 
+
+    public boolean isNewGame() {
+        return newGame;
+    }
 
 }
