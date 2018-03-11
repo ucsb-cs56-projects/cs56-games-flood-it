@@ -24,7 +24,7 @@ public class FloodItGUI extends JFrame {
 
     private FloodItController controller;
     private JFrame frame;
-    private Container textContainer;
+    private JPanel textContainer;
     private FloodItGrid gridBoard;
     private FloodItInstructGUI instructions;
     private JTextArea messageArea;
