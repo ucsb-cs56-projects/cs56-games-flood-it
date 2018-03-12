@@ -57,6 +57,7 @@ public class FloodItGrid extends JPanel {
 
             }
         }
+        SwingUtilities.updateComponentTreeUI(this);
     }
 
 

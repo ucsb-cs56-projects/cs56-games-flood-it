@@ -28,7 +28,6 @@ public class FloodItGUI extends JFrame {
     private FloodItGrid gridBoard;
     private FloodItInstructGUI instructions;
     private JTextArea messageArea;
-    private JButton buttonInstruction;
     private JPanel buttonPanel;
     private JTextField countdown;
     private JLabel movesLeft;
@@ -55,12 +54,12 @@ public class FloodItGUI extends JFrame {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(1000, 800);
         gridBoard = new FloodItGrid(controller.getGrid(), colors);
-        buttonInstruction = new JButton("Instructions");
         //set JTextArea properties for the big message returning box
         messageArea = new JTextArea(40, 20);
         messageArea.setEditable(false);
         JScrollPane messageScroller = new JScrollPane(messageArea);
         messageScroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        messageScroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
         //set JTextField properties for countdown box
         countdown = new JTextField(controller.getMovesLeft().toString(), 2);
         countdown.setEditable(false);
@@ -89,7 +88,7 @@ public class FloodItGUI extends JFrame {
                         else if (controller.getMovesLeft() == 0)
                             messageArea.append("You Lose :(\n");
                     } else if (controller.getMovesLeft() != 0 && !controller.checkWin())
-                        messageArea.append("Invalid move.\n");
+                        messageArea.append("Invalid move\n");
                 }
             });
         }
@@ -100,10 +99,13 @@ public class FloodItGUI extends JFrame {
         textContainer.setLayout(new BoxLayout(textContainer, BoxLayout.PAGE_AXIS));
         //add Components to textContainer
         //textContainer.add(messageScroller);
-        textContainer.add(messageArea);
+        textContainer.add(messageScroller);
 		JPanel buttonContainer = new JPanel();
-        buttonContainer.add(buttonInstruction);
         textContainer.add(buttonContainer);
+		buttonContainer.setLayout(new BoxLayout(buttonContainer, BoxLayout.PAGE_AXIS));
+        JButton buttonInstruction = new JButton("Instructions");
+        buttonInstruction.setAlignmentX(Component.CENTER_ALIGNMENT);
+        buttonContainer.add(buttonInstruction);
         buttonInstruction.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 instructions = new FloodItInstructGUI();
@@ -111,12 +113,24 @@ public class FloodItGUI extends JFrame {
             }
         });
         JButton newGameButton = new JButton("New Game");
+        newGameButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         buttonContainer.add(newGameButton);
         newGameButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 newGame = true;
                 frame.setVisible(false);
                 frame.dispose();
+            }
+        });
+        JButton resetGameButton = new JButton("Reset Game");
+        resetGameButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        buttonContainer.add(resetGameButton);
+        resetGameButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                controller.reset();
+                gridBoard.redrawLabel(controller.getGrid(), colors);
+                countdown.setText(controller.getMovesLeft().toString());
+                messageArea.append("Game reset\n");
             }
         });
         //add textContainer to JFrame
