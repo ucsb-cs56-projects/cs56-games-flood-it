@@ -50,7 +50,9 @@ public class FloodItGrid extends JPanel {
         for (int j = 0; j < grid.length; j++) {
             for (int k = 0; k < grid.length; k++) {
                 JPanel current = new JPanel();
+                //current.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
                 current.setBackground(colors[grid[j][k]]);
+                current.setBorder(BorderFactory.createMatteBorder(1,1,1,1, Color.black));
                 final int fj = j;
                 final int fk = k;
                 current.addMouseListener(new MouseAdapter() {
