@@ -3,6 +3,8 @@ package edu.ucsb.cs56.projects.games.flood_it.view;
 import java.awt.*;
 import java.awt.Color;
 import javax.swing.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Random;
 
 /**
@@ -18,22 +20,18 @@ import java.util.Random;
  */
 public class FloodItGrid extends JPanel {
 
+    private FloodItGUI frame;
+
     /**
      * FloodItGrid initializes a grid with a given size and given colors
      *
      * @param grid   A NxN Matrix of integers representing colors in an array
      * @param colors an array of Colors
      */
-    public FloodItGrid(int[][] grid, Color[] colors) {
+    public FloodItGrid(FloodItGUI frame, int[][] grid, Color[] colors) {
+        this.frame = frame;
         this.setLayout(new GridLayout(grid.length, grid.length));
-        for (int j = 0; j < grid.length; j++) {
-            for (int k = 0; k < grid.length; k++) {
-                JPanel currentPanel = new JPanel();
-                currentPanel.setBackground(colors[grid[j][k]]);
-                add(currentPanel);
-
-            }
-        }
+        redrawLabel(grid, colors);
     }
 
     /**
@@ -53,6 +51,13 @@ public class FloodItGrid extends JPanel {
             for (int k = 0; k < grid.length; k++) {
                 JPanel current = new JPanel();
                 current.setBackground(colors[grid[j][k]]);
+                final int fj = j;
+                final int fk = k;
+                current.addMouseListener(new MouseAdapter() {
+                    public void mousePressed(MouseEvent e) {
+                        frame.colorClick(grid[fj][fk]);
+                    }
+                });
                 add(current);
 
             }

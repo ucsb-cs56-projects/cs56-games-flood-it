@@ -53,7 +53,7 @@ public class FloodItGUI extends JFrame {
         frame = new JFrame("Flood It! by SM and KJ and KB and CL and DH and DBN and GS and KW");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(1000, 800);
-        gridBoard = new FloodItGrid(controller.getGrid(), colors);
+        gridBoard = new FloodItGrid(this, controller.getGrid(), colors);
         //set JTextArea properties for the big message returning box
         messageArea = new JTextArea(40, 20);
         messageArea.setEditable(false);
@@ -78,17 +78,7 @@ public class FloodItGUI extends JFrame {
             buttonPanel.add(currentButton);
             currentButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    if (controller.getMovesLeft() != 0 && !controller.checkWin() && controller.getGrid()[0][0] != k) {
-                        countdown.setText(decrementAMove().toString());
-                        messageArea.append(colorNames[k] + "\n");
-                        controller.floodIt(0, 0, k, controller.getGrid()[0][0]);
-                        gridBoard.redrawLabel(controller.getGrid(), colors);
-                        if (controller.checkWin())
-                            messageArea.append("You Win :D\n");
-                        else if (controller.getMovesLeft() == 0)
-                            messageArea.append("You Lose :(\n");
-                    } else if (controller.getMovesLeft() != 0 && !controller.checkWin())
-                        messageArea.append("Invalid move\n");
+                    colorClick(k);
                 }
             });
         }
@@ -158,6 +148,20 @@ public class FloodItGUI extends JFrame {
 
     public boolean isNewGame() {
         return newGame;
+    }
+
+    public void colorClick(int k){
+        if (controller.getMovesLeft() != 0 && !controller.checkWin() && controller.getGrid()[0][0] != k) {
+            countdown.setText(decrementAMove().toString());
+            messageArea.append(colorNames[k] + "\n");
+            controller.floodIt(0, 0, k, controller.getGrid()[0][0]);
+            gridBoard.redrawLabel(controller.getGrid(), colors);
+            if (controller.checkWin())
+                messageArea.append("You Win :D\n");
+            else if (controller.getMovesLeft() == 0)
+                messageArea.append("You Lose :(\n");
+        } else if (controller.getMovesLeft() != 0 && !controller.checkWin())
+            messageArea.append("Invalid move\n");
     }
 
 }
