@@ -9,6 +9,26 @@ The grid is filled with random colors using one of 3 algorithms selected by diff
 When a button is clicked, the top-left cell and any cells currently forming a contiguous region with its color will be repainted with that color and the amount of turns left will decrease by 1. 
 
 
+# Final remarks W18
+
+The game is fully fuctional and playable and the work that needs to be done is basically refactoring and adding new features. In other words the basics for a FloodIt-game is already done and future work consists more of making the playing experince better. It is basically half way to a MVC design but not quite there yet.
+
+What we have done on the project
+* Refactoring the FloodItGUI class
+* Adding a start menu
+* Adding a new game-button and a reset button
+* Making the grid clickable
+* Improving the max turn algorithm
+
+Some known bugs/issues/areas for improvement:
+* Implementing a MVC design
+* Writting unit tests
+* Improving the max turn algorithm
+
+There are a few other ideas for new features that are submitted as issues in the repo.
+
+An example of the game 'Floodit' you can play can be found [here](http://unixpapa.com/floodit/)
+
 # Final notes from F17
 
 Currently almost all of the code lives in FloodItGUI.java. This could be refactored to make an object for the grid to make the code more readable and/or robust in the future.
