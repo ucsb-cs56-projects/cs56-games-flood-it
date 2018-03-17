@@ -8,7 +8,7 @@ updated by: Chris Luo & Kevin Briggs
   -->
 
   <property name="projectName" value="FloodIt" />   
-  <property name="mainClass" value="FloodItGUI" />
+  <property name="mainClass" value="FloodItLauncher" />
   <property name="packagePrefix" value="edu.ucsb.cs56.projects.games.flood_it.view" />
   <property environment="env"/> <!-- load the environment variables --> 
   <property name="projectPath" value="cs56/cs56_games_flood_it/javadoc" />
