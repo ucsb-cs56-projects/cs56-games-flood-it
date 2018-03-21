@@ -24,17 +24,17 @@ public class FloodItGUI extends JFrame {
 
     private FloodItController controller;
     private JFrame frame;
-    private Container textContainer;
+    private JPanel textContainer;
     private FloodItGrid gridBoard;
     private FloodItInstructGUI instructions;
     private JTextArea messageArea;
-    private JButton buttonInstruction;
     private JPanel buttonPanel;
     private JTextField countdown;
     private JLabel movesLeft;
     private final Color[] colors = {Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW,
             Color.MAGENTA, Color.CYAN, Color.ORANGE, Color.BLACK};
     private String[] colorNames = {"Red", "Blue", "Green", "Yellow", "Magenta", "Cyan", "Orange", "Black"};
+    private boolean newGame;
 
     /**
      * FloodItGUI constructor creates an instance of the game
@@ -53,13 +53,13 @@ public class FloodItGUI extends JFrame {
         frame = new JFrame("Flood It! by SM and KJ and KB and CL and DH and DBN and GS and KW");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(1000, 800);
-        gridBoard = new FloodItGrid(controller.getGrid(), colors);
-        buttonInstruction = new JButton("Instructions");
+        gridBoard = new FloodItGrid(this, controller.getGrid(), colors);
         //set JTextArea properties for the big message returning box
         messageArea = new JTextArea(40, 20);
         messageArea.setEditable(false);
         JScrollPane messageScroller = new JScrollPane(messageArea);
         messageScroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        messageScroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
         //set JTextField properties for countdown box
         countdown = new JTextField(controller.getMovesLeft().toString(), 2);
         countdown.setEditable(false);
@@ -78,33 +78,49 @@ public class FloodItGUI extends JFrame {
             buttonPanel.add(currentButton);
             currentButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    if (controller.getMovesLeft() != 0 && !controller.checkWin() && controller.getGrid()[0][0] != k) {
-                        countdown.setText(decrementAMove().toString());
-                        messageArea.append(colorNames[k] + "\n");
-                        controller.floodIt(0, 0, k, controller.getGrid()[0][0]);
-                        gridBoard.redrawLabel(controller.getGrid(), colors);
-                        if (controller.checkWin())
-                            messageArea.append("You Win :D\n");
-                        else if (controller.getMovesLeft() == 0)
-                            messageArea.append("You Lose :(\n");
-                    } else if (controller.getMovesLeft() != 0 && !controller.checkWin())
-                        messageArea.append("Invalid move.\n");
+                    colorClick(k);
                 }
             });
         }
         //add buttonPanel to South component in BorderLayout of JFrame
         frame.getContentPane().add(BorderLayout.SOUTH, buttonPanel);
         //Container for text and instructions button
-        textContainer = new Container();
+        textContainer = new JPanel();
         textContainer.setLayout(new BoxLayout(textContainer, BoxLayout.PAGE_AXIS));
         //add Components to textContainer
         //textContainer.add(messageScroller);
-        textContainer.add(messageArea);
-        textContainer.add(buttonInstruction);
+        textContainer.add(messageScroller);
+		JPanel buttonContainer = new JPanel();
+        textContainer.add(buttonContainer);
+		buttonContainer.setLayout(new BoxLayout(buttonContainer, BoxLayout.PAGE_AXIS));
+        JButton buttonInstruction = new JButton("Instructions");
+        buttonInstruction.setAlignmentX(Component.CENTER_ALIGNMENT);
+        buttonContainer.add(buttonInstruction);
         buttonInstruction.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 instructions = new FloodItInstructGUI();
                 messageArea.append("You have clicked the instructions\n");
+            }
+        });
+        JButton newGameButton = new JButton("New Game");
+        newGameButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        buttonContainer.add(newGameButton);
+        newGameButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                newGame = true;
+                frame.setVisible(false);
+                frame.dispose();
+            }
+        });
+        JButton resetGameButton = new JButton("Reset Game");
+        resetGameButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        buttonContainer.add(resetGameButton);
+        resetGameButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                controller.reset();
+                gridBoard.redrawLabel(controller.getGrid(), colors);
+                countdown.setText(controller.getMovesLeft().toString());
+                messageArea.append("Game reset\n");
             }
         });
         //add textContainer to JFrame
@@ -129,5 +145,23 @@ public class FloodItGUI extends JFrame {
         }
     }
 
+
+    public boolean isNewGame() {
+        return newGame;
+    }
+
+    public void colorClick(int k){
+        if (controller.getMovesLeft() != 0 && !controller.checkWin() && controller.getGrid()[0][0] != k) {
+            countdown.setText(decrementAMove().toString());
+            messageArea.append(colorNames[k] + "\n");
+            controller.floodIt(0, 0, k, controller.getGrid()[0][0]);
+            gridBoard.redrawLabel(controller.getGrid(), colors);
+            if (controller.checkWin())
+                messageArea.append("You Win :D\n");
+            else if (controller.getMovesLeft() == 0)
+                messageArea.append("You Lose :(\n");
+        } else if (controller.getMovesLeft() != 0 && !controller.checkWin())
+            messageArea.append("Invalid move\n");
+    }
 
 }

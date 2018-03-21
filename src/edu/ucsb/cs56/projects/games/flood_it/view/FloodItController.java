@@ -17,6 +17,8 @@ public class FloodItController {
     private int difficultyLevel;
     private int movesLeft;
     private int[][] grid;
+    private int[][] startGrid;
+    private int startMoves;
 
     /**
      * FloodItController constructor creates an instance of the game
@@ -37,6 +39,9 @@ public class FloodItController {
             this.movesLeft = (int) (calculateBaselineMovesLeft(dimension * dimension, dimension / 2));
         if (difficultyLevel == 3)
             this.movesLeft = (int) (calculateBaselineMovesLeft(dimension * dimension, 1));
+
+        startGrid = gridCopy(grid);
+        startMoves = movesLeft;
     }
 
     /**
@@ -261,5 +266,10 @@ public class FloodItController {
             newGrid[i] = grid[i].clone();
         }
         return newGrid;
+    }
+
+    public void reset() {
+        grid = gridCopy(startGrid);
+        movesLeft = startMoves;
     }
 }
